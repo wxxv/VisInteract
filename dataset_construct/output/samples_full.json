@@ -1,0 +1,2827 @@
+[
+  {
+    "sample_id": "q1473_c0",
+    "source_question_id": 1473,
+    "candidate_id": "q1473_c0",
+    "source_instance": {
+      "question_id": 1473,
+      "question": "What was the average monthly consumption of customers in SME for the year 2013?",
+      "db_id": "debit_card_specializing",
+      "evidence": "Average Monthly consumption = AVG(Consumption) / 12; Year 2013 can be presented as Between 201301 And 201312; The first 4 strings of the Date values in the yearmonth table can represent year.",
+      "gold_sql": "SELECT AVG(T2.Consumption) / 12 FROM customers AS T1 INNER JOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID WHERE SUBSTR(T2.Date, 1, 4) = '2013' AND T1.Segment = 'SME'",
+      "difficulty": "moderate"
+    },
+    "candidate": {
+      "candidate_id": "q1473_c0",
+      "chart_type": "faceted_area_chart",
+      "chart_category": "Area Charts",
+      "vis_intent": "Compares the volume and fluctuation of consumption over time, separated by customer segment.",
+      "vis_intent_type": "trend",
+      "analytical_question": "How does the monthly consumption trend differ between SME and LAM customer segments over the entire dataset?",
+      "tables_needed": [
+        "customers",
+        "yearmonth"
+      ],
+      "data_mapping": {
+        "primary": {
+          "x": "Date (type: temporal)",
+          "y": "Consumption (aggregation: sum)",
+          "color": "Segment"
+        },
+        "facet": {
+          "field": "Segment",
+          "type": "row"
+        }
+      },
+      "visualization_features": [
+        "aggregation: sum consumption",
+        "time_unit: yearmonth parsing",
+        "faceting: split by segment"
+      ],
+      "dimensions": [
+        "Date",
+        "Segment"
+      ],
+      "measures": [
+        "Consumption"
+      ],
+      "aggregation": "COUNT",
+      "features": [
+        {
+          "path": "mark.type",
+          "op": "eq",
+          "value": "area"
+        },
+        {
+          "path": "encoding.x.field",
+          "op": "eq",
+          "value": "Date"
+        },
+        {
+          "path": "encoding.x.type",
+          "op": "eq",
+          "value": "temporal"
+        },
+        {
+          "path": "encoding.y.field",
+          "op": "eq",
+          "value": "Consumption"
+        },
+        {
+          "path": "encoding.y.aggregate",
+          "op": "eq",
+          "value": "count"
+        },
+        {
+          "path": "encoding.y.type",
+          "op": "eq",
+          "value": "quantitative"
+        },
+        {
+          "path": "encoding.color.field",
+          "op": "eq",
+          "value": "Segment"
+        }
+      ],
+      "diversity_score": 0.0
+    },
+    "vis_sql": "",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\n# Connect to the database\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Query to retrieve total consumption grouped by date and customer segment\n# Joining customers and yearmonth tables to associate segments with consumption data\nSQL = \"\"\"\nSELECT \n    T2.Date,\n    T1.Segment,\n    SUM(T2.Consumption) AS Consumption\nFROM customers AS T1\nINNER JOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID\nGROUP BY T2.Date, T1.Segment\nORDER BY T2.Date\n\"\"\"\n\n# Execute the query and load into a DataFrame\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert the 'Date' column (format YYYYMM) to datetime objects for proper time-series visualization\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')\n\n# The resulting DataFrame 'df' contains Date, Segment, and total Consumption",
+    "vis_question": "I'm working on the presentation for the stakeholders and I was thinking we really need to illustrate how our usage volume has been shifting recently. Can you put together a view of the total consumption trends over time? It's important that we can tell the different buyer groups apart, so please make sure to break it down by that. I just want to clearly see the ups and downs for each group.",
+    "vis_question_clear": "Visualize the fluctuation of total monthly consumption over time, broken down by customer segment.",
+    "original_question": "What was the average monthly consumption of customers in SME for the year 2013?",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "error_correction",
+        "visualization_ambiguity"
+      ],
+      "template_names": [
+        "field_name_error",
+        "encoding_channel_missing"
+      ],
+      "target_feature_paths": [
+        "encoding.color.field",
+        "encoding.*.field",
+        "encoding.shape.field",
+        "encoding.size.field"
+      ],
+      "preferred_interface": "ask_user_vis",
+      "difficulty": "medium",
+      "corruption": null
+    },
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\n# Connect to the database\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Query to retrieve total consumption grouped by date and customer segment\nSQL = \"\"\"\nSELECT \n    T2.Date,\n    T1.Segment,\n    SUM(T2.Consumption) AS Consumption\nFROM customers AS T1\nINNER JOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID\nGROUP BY T2.Date, T1.Segment\nORDER BY T2.Date\n\"\"\"\n\n# Execute the query and load into a DataFrame\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert the 'Date' column (format YYYYMM) to datetime objects for proper time-series visualization\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')\n\n# Stage 3: Visualization\nchart = alt.Chart(df).mark_area().encode(\n    x=alt.X('Date:T', title='Date'),\n    y=alt.Y('Consumption:Q', title='Total Consumption'),\n    color=alt.Color('Segment:N', title='Segment'),\n    row=alt.Row('Segment:N', header=alt.Header(title='Customer Segment'))\n).properties(\n    height=80,\n    width=600,\n    title='Fluctuation of Total Monthly Consumption by Segment'\n)\n\nchart",
+    "vega_lite_spec": {
+      "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json",
+      "config": {
+        "view": {
+          "continuousHeight": 300,
+          "continuousWidth": 300
+        }
+      },
+      "data": {
+        "name": "data-6482c1c05e8d7238aa81d66bc7b4dbf5"
+      },
+      "datasets": {
+        "data-6482c1c05e8d7238aa81d66bc7b4dbf5": [
+          {
+            "Consumption": 2020.86,
+            "Date": "2011-12-01T00:00:00",
+            "Segment": "KAM"
+          },
+          {
+            "Consumption": 575.79,
+            "Date": "2011-12-01T00:00:00",
+            "Segment": "LAM"
+          },
+          {
+            "Consumption": 1576.01,
+            "Date": "2011-12-01T00:00:00",
+            "Segment": "SME"
+          },
+          {
+            "Consumption": 13783165.3,
+            "Date": "2012-01-01T00:00:00",
+            "Segment": "KAM"
+          },
+          {
+            "Consumption": 12680441.37,
+            "Date": "2012-01-01T00:00:00",
+            "Segment": "LAM"
+          }
+        ]
+      },
+      "encoding": {
+        "color": {
+          "field": "Segment",
+          "title": "Segment",
+          "type": "nominal"
+        },
+        "row": {
+          "field": "Segment",
+          "header": {
+            "title": "Customer Segment"
+          },
+          "type": "nominal"
+        },
+        "x": {
+          "field": "Date",
+          "title": "Date",
+          "type": "temporal"
+        },
+        "y": {
+          "field": "Consumption",
+          "title": "Total Consumption",
+          "type": "quantitative"
+        }
+      },
+      "height": 80,
+      "mark": {
+        "type": "area"
+      },
+      "title": "Fluctuation of Total Monthly Consumption by Segment",
+      "width": 600
+    },
+    "image_path": null,
+    "features": [
+      {
+        "path": "mark.type",
+        "op": "eq",
+        "value": "area"
+      },
+      {
+        "path": "encoding.color.field",
+        "op": "eq",
+        "value": "Segment"
+      },
+      {
+        "path": "encoding.color.type",
+        "op": "eq",
+        "value": "nominal"
+      },
+      {
+        "path": "encoding.row.field",
+        "op": "eq",
+        "value": "Segment"
+      },
+      {
+        "path": "encoding.row.type",
+        "op": "eq",
+        "value": "nominal"
+      },
+      {
+        "path": "encoding.x.field",
+        "op": "eq",
+        "value": "Date"
+      },
+      {
+        "path": "encoding.x.type",
+        "op": "eq",
+        "value": "temporal"
+      },
+      {
+        "path": "encoding.y.field",
+        "op": "eq",
+        "value": "Consumption"
+      },
+      {
+        "path": "encoding.y.type",
+        "op": "eq",
+        "value": "quantitative"
+      }
+    ],
+    "required_key_features": [
+      {
+        "id": "kf_mark_area",
+        "type": "mark",
+        "text": "Use an area chart to visualize the volume and fluctuation of consumption.",
+        "args": {
+          "mark": "area"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_composition_facet",
+        "type": "composition",
+        "text": "Split the visualization into separate rows for each Customer Segment to compare them side-by-side.",
+        "args": {
+          "row": "Segment"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_xy",
+        "type": "encoding",
+        "text": "Show the Total Consumption values over time.",
+        "args": {
+          "x": "Date",
+          "y": "Consumption"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_color",
+        "type": "encoding",
+        "text": "Color-code the areas based on the Segment.",
+        "args": {
+          "color": "Segment"
+        },
+        "must": false
+      }
+    ],
+    "chart_type": "faceted_area_chart",
+    "chart_category": "Area Charts",
+    "vis_intent_type": "trend",
+    "db_id": "debit_card_specializing",
+    "difficulty": "moderate",
+    "validation_passed": true,
+    "data_quality_report": {
+      "suitable": true,
+      "score": 1.0,
+      "issues": [],
+      "suggestions": []
+    },
+    "vlm_validation_report": {
+      "readable": true,
+      "readability_score": 0.95,
+      "chart_type_correct": true,
+      "data_represented_correctly": true,
+      "elements_complete": true,
+      "visual_quality_ok": true,
+      "answers_question": true,
+      "issues": [
+        "The X-axis labels display months ('December', 'April', etc.) which repeat, implying a multi-year duration, but the year is not explicitly shown in the labels, making the specific timeline slightly ambiguous.",
+        "The Y-axis tick labels are long numbers (e.g., '100,000,000'), which takes up space and is harder to read quickly."
+      ],
+      "suggestions": [
+        "Modify the X encoding to include a specific date format that shows the year, e.g., `axis=alt.Axis(format='%Y-%b')` inside `alt.X(...)`.",
+        "Modify the Y encoding to use SI prefix formatting for large numbers, e.g., `axis=alt.Axis(format='~s')` inside `alt.Y(...)`."
+      ]
+    },
+    "chart_image_path": "D:\\Machine_Learning\\Deep_Learning\\Project\\Vis-Interact\\dataset_construct\\output\\temp_images\\q1473_c0.png"
+  },
+  {
+    "sample_id": "q1472_c2",
+    "source_question_id": 1472,
+    "candidate_id": "q1472_c2",
+    "source_instance": {
+      "question_id": 1472,
+      "question": "In 2012, who had the least consumption in LAM?",
+      "db_id": "debit_card_specializing",
+      "evidence": "Year 2012 can be presented as Between 201201 And 201212; The first 4 strings of the Date values in the yearmonth table can represent year.",
+      "gold_sql": "SELECT T1.CustomerID FROM customers AS T1 INNER JOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.Segment = 'LAM' AND SUBSTR(T2.Date, 1, 4) = '2012' GROUP BY T1.CustomerID ORDER BY SUM(T2.Consumption) ASC LIMIT 1",
+      "difficulty": "moderate"
+    },
+    "candidate": {
+      "candidate_id": "q1472_c2",
+      "chart_type": "faceted_scatter_plot",
+      "chart_category": "Scatter Plots",
+      "vis_intent": "Comparing the correlation of volume vs. cost across different business models to identify pricing structure differences.",
+      "vis_intent_type": "correlation",
+      "analytical_question": "Does the relationship between fuel quantity (Amount) and total price paid vary across different gas station segments (e.g., Premium vs Value for money)?",
+      "tables_needed": [
+        "transactions_1k",
+        "gasstations"
+      ],
+      "data_mapping": {
+        "primary": {
+          "x": "Amount (type: quantitative)",
+          "y": "Price (type: quantitative)"
+        },
+        "facet": {
+          "field": "Segment",
+          "type": "row"
+        }
+      },
+      "visualization_features": [
+        "faceting: split charts by Gas Station Segment",
+        "mark: points for individual transactions"
+      ],
+      "dimensions": [
+        "Amount",
+        "Segment"
+      ],
+      "measures": [
+        "Price"
+      ],
+      "aggregation": "COUNT",
+      "features": [
+        {
+          "path": "mark.type",
+          "op": "eq",
+          "value": "point"
+        },
+        {
+          "path": "encoding.x.field",
+          "op": "eq",
+          "value": "Amount"
+        },
+        {
+          "path": "encoding.x.type",
+          "op": "eq",
+          "value": "quantitative"
+        },
+        {
+          "path": "encoding.y.field",
+          "op": "eq",
+          "value": "Price"
+        },
+        {
+          "path": "encoding.y.aggregate",
+          "op": "eq",
+          "value": "count"
+        },
+        {
+          "path": "encoding.y.type",
+          "op": "eq",
+          "value": "quantitative"
+        },
+        {
+          "path": "encoding.color.field",
+          "op": "eq",
+          "value": "Segment"
+        }
+      ],
+      "diversity_score": 0.0
+    },
+    "vis_sql": "",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Select Amount and Price for the scatter plot, and Segment for faceting\n# Join transactions with gas stations to associate each transaction with a market segment\nSQL = \"\"\"\nSELECT \n    T1.Amount,\n    T1.Price,\n    T2.Segment\nFROM transactions_1k AS T1\nJOIN gasstations AS T2 ON T1.GasStationID = T2.GasStationID\nWHERE T1.Amount IS NOT NULL AND T1.Price IS NOT NULL\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# The data is already in the correct format for a faceted scatter plot (raw records)\n# Just ensuring the dataframe is ready\ndf.head()",
+    "vis_question": "I've been going through the operational data for our partner meeting next week, and I'm trying to get a better handle on our efficiency. Could you help me visualize the relationship between our transaction volumes and the costs? I really need to see if there's a connection there. I want to look at this specifically across the different gas station segments to see how they stack up against each other. Just generate a chart or something that shows how volume and cost relate for these segments.",
+    "vis_question_clear": "Visualize the correlation between transaction volume and cost across different gas station segments.",
+    "original_question": "In 2012, who had the least consumption in LAM?",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "visualization_ambiguity"
+      ],
+      "template_names": [
+        "chart_type_missing",
+        "axis_assignment_missing"
+      ],
+      "target_feature_paths": [
+        "mark.type",
+        "encoding.y.field",
+        "encoding.x.field"
+      ],
+      "preferred_interface": "ask_user_vis",
+      "difficulty": "medium",
+      "corruption": null
+    },
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Data retrieval\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Select Amount and Price for the scatter plot, and Segment for faceting\n# Join transactions with gas stations to associate each transaction with a market segment\nSQL = \"\"\"\nSELECT \n    T1.Amount,\n    T1.Price,\n    T2.Segment\nFROM transactions_1k AS T1\nJOIN gasstations AS T2 ON T1.GasStationID = T2.GasStationID\nWHERE T1.Amount IS NOT NULL AND T1.Price IS NOT NULL\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# No additional processing needed as the SQL provides the raw data required for the scatter plot\n\n# Stage 3: Visualization\nchart = alt.Chart(df).mark_point(filled=True, opacity=0.6).encode(\n    x=alt.X('Amount:Q', title='Transaction Volume'),\n    y=alt.Y('Price:Q', title='Transaction Cost'),\n    row=alt.Row('Segment:N', header=alt.Header(title='Gas Station Segment')),\n    tooltip=['Segment', 'Amount', 'Price']\n).properties(\n    width=400,\n    height=200,\n    title='Transaction Volume vs Cost by Gas Station Segment'\n).interactive()\n\nchart",
+    "vega_lite_spec": {
+      "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json",
+      "config": {
+        "view": {
+          "continuousHeight": 300,
+          "continuousWidth": 300
+        }
+      },
+      "data": {
+        "name": "data-01e8e31ab93402ade5e196750c713ec6"
+      },
+      "datasets": {
+        "data-01e8e31ab93402ade5e196750c713ec6": [
+          {
+            "Amount": 28,
+            "Price": 672.64,
+            "Segment": "Premium"
+          },
+          {
+            "Amount": 18,
+            "Price": 430.72,
+            "Segment": "Premium"
+          },
+          {
+            "Amount": 1,
+            "Price": 121.99,
+            "Segment": "Premium"
+          },
+          {
+            "Amount": 5,
+            "Price": 120.74,
+            "Segment": "Noname"
+          },
+          {
+            "Amount": 28,
+            "Price": 645.05,
+            "Segment": "Noname"
+          }
+        ]
+      },
+      "encoding": {
+        "row": {
+          "field": "Segment",
+          "header": {
+            "title": "Gas Station Segment"
+          },
+          "type": "nominal"
+        },
+        "tooltip": [
+          {
+            "field": "Segment",
+            "type": "nominal"
+          },
+          {
+            "field": "Amount",
+            "type": "quantitative"
+          },
+          {
+            "field": "Price",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "field": "Amount",
+          "title": "Transaction Volume",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "Price",
+          "title": "Transaction Cost",
+          "type": "quantitative"
+        }
+      },
+      "height": 200,
+      "mark": {
+        "filled": true,
+        "opacity": 0.6,
+        "type": "point"
+      },
+      "params": [
+        {
+          "bind": "scales",
+          "name": "param_1e9efca18e7a2868",
+          "select": {
+            "encodings": [
+              "x",
+              "y"
+            ],
+            "type": "interval"
+          }
+        }
+      ],
+      "title": "Transaction Volume vs Cost by Gas Station Segment",
+      "width": 400
+    },
+    "image_path": null,
+    "features": [
+      {
+        "path": "mark.type",
+        "op": "eq",
+        "value": "point"
+      },
+      {
+        "path": "encoding.row.field",
+        "op": "eq",
+        "value": "Segment"
+      },
+      {
+        "path": "encoding.row.type",
+        "op": "eq",
+        "value": "nominal"
+      },
+      {
+        "path": "encoding.x.field",
+        "op": "eq",
+        "value": "Amount"
+      },
+      {
+        "path": "encoding.x.type",
+        "op": "eq",
+        "value": "quantitative"
+      },
+      {
+        "path": "encoding.y.field",
+        "op": "eq",
+        "value": "Price"
+      },
+      {
+        "path": "encoding.y.type",
+        "op": "eq",
+        "value": "quantitative"
+      },
+      {
+        "path": "params",
+        "op": "exists",
+        "value": null
+      },
+      {
+        "path": "params[0].select.type",
+        "op": "eq",
+        "value": "interval"
+      },
+      {
+        "path": "params[0].bind",
+        "op": "exists",
+        "value": null
+      }
+    ],
+    "required_key_features": [
+      {
+        "id": "kf_mark_point",
+        "type": "mark",
+        "text": "Create a scatter plot to show the distribution of individual transactions.",
+        "args": {
+          "mark": "point"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_axes",
+        "type": "encoding",
+        "text": "Plot Transaction Volume on the x-axis versus Transaction Cost on the y-axis.",
+        "args": {
+          "x": "Amount",
+          "y": "Price"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_composition_row",
+        "type": "composition",
+        "text": "Break the chart down into separate rows for each Gas Station Segment.",
+        "args": {
+          "row": "Segment"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_interaction_zoom",
+        "type": "interaction",
+        "text": "Allow me to zoom in and pan around the chart to see dense areas better.",
+        "args": {
+          "bind": "scales"
+        },
+        "must": false
+      },
+      {
+        "id": "kf_interaction_tooltip",
+        "type": "interaction",
+        "text": "Show the specific segment, amount, and price when I hover over a dot.",
+        "args": {
+          "tooltip": [
+            "Segment",
+            "Amount",
+            "Price"
+          ]
+        },
+        "must": false
+      }
+    ],
+    "chart_type": "faceted_scatter_plot",
+    "chart_category": "Scatter Plots",
+    "vis_intent_type": "correlation",
+    "db_id": "debit_card_specializing",
+    "difficulty": "moderate",
+    "validation_passed": true,
+    "data_quality_report": {
+      "suitable": true,
+      "score": 1.0,
+      "issues": [],
+      "suggestions": []
+    },
+    "vlm_validation_report": {
+      "readable": true,
+      "readability_score": 0.9,
+      "chart_type_correct": true,
+      "data_represented_correctly": true,
+      "elements_complete": true,
+      "visual_quality_ok": true,
+      "answers_question": true,
+      "issues": [
+        "The chart is vertically very tall (5 rows * 200px), making it difficult to view all segments simultaneously for comparison.",
+        "An outlier in the 'Discount' segment stretches the shared X and Y axes, causing the majority of data points in all segments to be compressed into the bottom-left corner."
+      ],
+      "suggestions": [
+        "Reduce the `height` in `.properties()` (e.g., to `height=120`) to make the chart more compact and easier to compare at a glance, similar to the reference image style.",
+        "Consider using `chart.interactive()` (which is already present) to allow zooming, or explicitly set axis domains if the outlier is not relevant to the general pricing structure analysis."
+      ]
+    },
+    "chart_image_path": "D:\\Machine_Learning\\Deep_Learning\\Project\\Vis-Interact\\dataset_construct\\output\\temp_images\\q1472_c2.png"
+  },
+  {
+    "sample_id": "q1471_c0",
+    "source_question_id": 1471,
+    "candidate_id": "q1471_c0",
+    "source_instance": {
+      "question_id": 1471,
+      "question": "What is the ratio of customers who pay in EUR against customers who pay in CZK?",
+      "db_id": "debit_card_specializing",
+      "evidence": "ratio of customers who pay in EUR against customers who pay in CZK = count(Currency = 'EUR') / count(Currency = 'CZK').",
+      "gold_sql": "SELECT CAST(SUM(IIF(Currency = 'EUR', 1, 0)) AS FLOAT) / SUM(IIF(Currency = 'CZK', 1, 0)) AS ratio FROM customers",
+      "difficulty": "simple"
+    },
+    "candidate": {
+      "candidate_id": "q1471_c0",
+      "chart_type": "normalized_stacked_area_chart",
+      "chart_category": "Area Charts",
+      "vis_intent": "Visualizes the changing proportion of consumption currency over time, extending the original static ratio query into a temporal trend.",
+      "vis_intent_type": "composition",
+      "analytical_question": "How does the monthly consumption market share evolve between customers paying in EUR versus CZK?",
+      "tables_needed": [
+        "customers",
+        "yearmonth"
+      ],
+      "data_mapping": {
+        "primary": {
+          "x": "Date (type: temporal)",
+          "y": "Consumption (aggregation: sum)",
+          "color": "Currency"
+        }
+      },
+      "visualization_features": [
+        "stack: normalize",
+        "aggregation: sum consumption",
+        "time_unit: yearmonth"
+      ],
+      "dimensions": [
+        "Date",
+        "Currency"
+      ],
+      "measures": [
+        "Consumption"
+      ],
+      "aggregation": "COUNT",
+      "features": [
+        {
+          "path": "mark.type",
+          "op": "eq",
+          "value": "area"
+        },
+        {
+          "path": "encoding.x.field",
+          "op": "eq",
+          "value": "Date"
+        },
+        {
+          "path": "encoding.x.type",
+          "op": "eq",
+          "value": "temporal"
+        },
+        {
+          "path": "encoding.y.field",
+          "op": "eq",
+          "value": "Consumption"
+        },
+        {
+          "path": "encoding.y.aggregate",
+          "op": "eq",
+          "value": "count"
+        },
+        {
+          "path": "encoding.y.type",
+          "op": "eq",
+          "value": "quantitative"
+        },
+        {
+          "path": "encoding.color.field",
+          "op": "eq",
+          "value": "Currency"
+        }
+      ],
+      "diversity_score": 0.0
+    },
+    "vis_sql": "",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Join yearmonth and customers to get consumption by date and currency\nSQL = '''\nSELECT \n    T1.Date,\n    T2.Currency,\n    SUM(T1.Consumption) AS Total_Consumption\nFROM yearmonth AS T1\nJOIN customers AS T2 ON T1.CustomerID = T2.CustomerID\nGROUP BY T1.Date, T2.Currency\nORDER BY T1.Date\n'''\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert 'Date' column (format YYYYMM) to datetime objects for temporal visualization\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')",
+    "vis_question": "Hey, I'm putting together the update for the client and I need to show them how the consumption shares by currency have been moving. I feel like a pie chart is usually the standard for shares, right? So could you make me a pie chart that tracks the evolution of these currency shares over time? I just need to see the general trends.",
+    "vis_question_clear": "Visualize the evolution of consumption shares by currency over time.",
+    "original_question": "What is the ratio of customers who pay in EUR against customers who pay in CZK?",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "error_correction",
+        "data_ambiguity"
+      ],
+      "template_names": [
+        "vis_data_incompatible",
+        "time_granularity_missing"
+      ],
+      "target_feature_paths": [
+        "mark.type",
+        "encoding.x.timeUnit",
+        "encoding.y.timeUnit"
+      ],
+      "preferred_interface": "ask_user_vis",
+      "difficulty": "hard",
+      "corruption": null
+    },
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Join yearmonth and customers to get consumption by date and currency\nSQL = '''\nSELECT \n    T1.Date,\n    T2.Currency,\n    SUM(T1.Consumption) AS Total_Consumption\nFROM yearmonth AS T1\nJOIN customers AS T2 ON T1.CustomerID = T2.CustomerID\nGROUP BY T1.Date, T2.Currency\nORDER BY T1.Date\n'''\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert 'Date' column (format YYYYMM) to datetime objects for temporal visualization\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')\n\n# Stage 3: Visualization\nchart = alt.Chart(df).mark_area().encode(\n    x=alt.X('Date:T', title='Date'),\n    y=alt.Y('Total_Consumption:Q', stack='normalize', axis=alt.Axis(format='%'), title='Share of Consumption'),\n    color=alt.Color('Currency:N', title='Currency'),\n    tooltip=[\n        alt.Tooltip('Date:T', format='%Y-%m', title='Date'),\n        alt.Tooltip('Currency:N', title='Currency'),\n        alt.Tooltip('Total_Consumption:Q', format=',.2f', title='Consumption')\n    ]\n).properties(\n    title='Evolution of Consumption Shares by Currency Over Time',\n    width=600,\n    height=400\n)\n\nchart",
+    "vega_lite_spec": {
+      "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json",
+      "config": {
+        "view": {
+          "continuousHeight": 300,
+          "continuousWidth": 300
+        }
+      },
+      "data": {
+        "name": "data-d3e19cc8a3678987e417236abc5ee44d"
+      },
+      "datasets": {
+        "data-d3e19cc8a3678987e417236abc5ee44d": [
+          {
+            "Currency": "CZK",
+            "Date": "2011-12-01T00:00:00",
+            "Total_Consumption": 3447.83
+          },
+          {
+            "Currency": "EUR",
+            "Date": "2011-12-01T00:00:00",
+            "Total_Consumption": 724.8299999999999
+          },
+          {
+            "Currency": "CZK",
+            "Date": "2012-01-01T00:00:00",
+            "Total_Consumption": 43773753.38
+          },
+          {
+            "Currency": "EUR",
+            "Date": "2012-01-01T00:00:00",
+            "Total_Consumption": 306535.46
+          },
+          {
+            "Currency": "CZK",
+            "Date": "2012-02-01T00:00:00",
+            "Total_Consumption": 48198097.43
+          }
+        ]
+      },
+      "encoding": {
+        "color": {
+          "field": "Currency",
+          "title": "Currency",
+          "type": "nominal"
+        },
+        "tooltip": [
+          {
+            "field": "Date",
+            "format": "%Y-%m",
+            "title": "Date",
+            "type": "temporal"
+          },
+          {
+            "field": "Currency",
+            "title": "Currency",
+            "type": "nominal"
+          },
+          {
+            "field": "Total_Consumption",
+            "format": ",.2f",
+            "title": "Consumption",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "field": "Date",
+          "title": "Date",
+          "type": "temporal"
+        },
+        "y": {
+          "axis": {
+            "format": "%"
+          },
+          "field": "Total_Consumption",
+          "stack": "normalize",
+          "title": "Share of Consumption",
+          "type": "quantitative"
+        }
+      },
+      "height": 400,
+      "mark": {
+        "type": "area"
+      },
+      "title": "Evolution of Consumption Shares by Currency Over Time",
+      "width": 600
+    },
+    "image_path": null,
+    "features": [
+      {
+        "path": "mark.type",
+        "op": "eq",
+        "value": "area"
+      },
+      {
+        "path": "encoding.color.field",
+        "op": "eq",
+        "value": "Currency"
+      },
+      {
+        "path": "encoding.color.type",
+        "op": "eq",
+        "value": "nominal"
+      },
+      {
+        "path": "encoding.x.field",
+        "op": "eq",
+        "value": "Date"
+      },
+      {
+        "path": "encoding.x.type",
+        "op": "eq",
+        "value": "temporal"
+      },
+      {
+        "path": "encoding.y.field",
+        "op": "eq",
+        "value": "Total_Consumption"
+      },
+      {
+        "path": "encoding.y.type",
+        "op": "eq",
+        "value": "quantitative"
+      }
+    ],
+    "required_key_features": [
+      {
+        "id": "kf_mark_area",
+        "type": "mark",
+        "text": "Use a 100% stacked area chart to visualize the evolution of proportions.",
+        "args": {
+          "mark": "area"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_x",
+        "type": "encoding",
+        "text": "Display the timeline based on the Date along the bottom axis.",
+        "args": {
+          "channel": "x",
+          "field": "Date"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_y",
+        "type": "encoding",
+        "text": "Show the share of Total Consumption as a percentage on the vertical axis.",
+        "args": {
+          "channel": "y",
+          "field": "Total_Consumption"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_color",
+        "type": "encoding",
+        "text": "Distinguish between different Currencies using color segments.",
+        "args": {
+          "channel": "color",
+          "field": "Currency"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_interaction_tooltip",
+        "type": "interaction",
+        "text": "Show details like the specific date and consumption amount when hovering.",
+        "args": {
+          "interaction": "tooltip"
+        },
+        "must": false
+      }
+    ],
+    "chart_type": "normalized_stacked_area_chart",
+    "chart_category": "Area Charts",
+    "vis_intent_type": "composition",
+    "db_id": "debit_card_specializing",
+    "difficulty": "simple",
+    "validation_passed": true,
+    "data_quality_report": {
+      "suitable": true,
+      "score": 1.0,
+      "issues": [],
+      "suggestions": []
+    },
+    "vlm_validation_report": {
+      "readable": true,
+      "readability_score": 0.95,
+      "chart_type_correct": true,
+      "data_represented_correctly": true,
+      "elements_complete": true,
+      "visual_quality_ok": true,
+      "answers_question": true,
+      "issues": [
+        "The X-axis labels show repeated months (e.g., 'December', 'April') without explicitly stating the year, which can make the specific timeline ambiguous over a multi-year period."
+      ],
+      "suggestions": [
+        "Modify the X-axis encoding to include the year in the label format for better temporal clarity. Change `x=alt.X('Date:T', title='Date')` to `x=alt.X('Date:T', title='Date', axis=alt.Axis(format='%b %Y'))`."
+      ]
+    },
+    "chart_image_path": "D:\\Machine_Learning\\Deep_Learning\\Project\\Vis-Interact\\dataset_construct\\output\\temp_images\\q1471_c0.png"
+  },
+  {
+    "sample_id": "q1473_c1",
+    "source_question_id": 1473,
+    "candidate_id": "q1473_c1",
+    "source_instance": {
+      "question_id": 1473,
+      "question": "What was the average monthly consumption of customers in SME for the year 2013?",
+      "db_id": "debit_card_specializing",
+      "evidence": "Average Monthly consumption = AVG(Consumption) / 12; Year 2013 can be presented as Between 201301 And 201312; The first 4 strings of the Date values in the yearmonth table can represent year.",
+      "gold_sql": "SELECT AVG(T2.Consumption) / 12 FROM customers AS T1 INNER JOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID WHERE SUBSTR(T2.Date, 1, 4) = '2013' AND T1.Segment = 'SME'",
+      "difficulty": "moderate"
+    },
+    "candidate": {
+      "candidate_id": "q1473_c1",
+      "chart_type": "sorted_error_bars_showing_confidence_interval",
+      "chart_category": "Advanced Calculations",
+      "vis_intent": "Reveals which gas station segments are most expensive on average and how consistent their pricing is.",
+      "vis_intent_type": "distribution",
+      "analytical_question": "What is the average transaction price and statistical spread (confidence interval) for each gas station segment?",
+      "tables_needed": [
+        "transactions_1k",
+        "gasstations"
+      ],
+      "data_mapping": {
+        "primary": {
+          "x": "Price (aggregation: mean)",
+          "y": "Segment"
+        },
+        "layers": [
+          {
+            "type": "rule",
+            "mark_description": "error bars showing confidence interval"
+          },
+          {
+            "type": "circle",
+            "mark_description": "mean value point"
+          }
+        ]
+      },
+      "visualization_features": [
+        "aggregation: mean price",
+        "calculation: confidence interval",
+        "sorting: descending by mean price"
+      ],
+      "dimensions": [
+        "Price"
+      ],
+      "measures": [
+        "Segment"
+      ],
+      "aggregation": "COUNT",
+      "features": [
+        {
+          "path": "mark.type",
+          "op": "eq",
+          "value": "bar"
+        },
+        {
+          "path": "encoding.x.field",
+          "op": "eq",
+          "value": "Price"
+        },
+        {
+          "path": "encoding.x.type",
+          "op": "eq",
+          "value": "quantitative"
+        },
+        {
+          "path": "encoding.y.field",
+          "op": "eq",
+          "value": "Segment"
+        },
+        {
+          "path": "encoding.y.aggregate",
+          "op": "eq",
+          "value": "count"
+        },
+        {
+          "path": "encoding.y.type",
+          "op": "eq",
+          "value": "quantitative"
+        },
+        {
+          "path": "encoding.x.aggregate",
+          "op": "eq",
+          "value": "mean"
+        }
+      ],
+      "diversity_score": 0.0
+    },
+    "vis_sql": "",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Retrieve raw Price data associated with each Gas Station Segment.\n# We join transactions to gasstations to get the Segment for each transaction.\n# Raw data is required to calculate the mean and confidence intervals dynamically in the visualization.\nSQL = \"\"\"\nSELECT \n    T2.Segment,\n    T1.Price\nFROM transactions_1k AS T1\nJOIN gasstations AS T2 ON T1.GasStationID = T2.GasStationID\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# The result is ready for visualization (x=Price, y=Segment).\n# Aggregation (Mean) and Error Bars (Confidence Interval) will be computed by the chart engine.",
+    "vis_question": "Hi, I'm pulling together the deck for the strategy meeting and I need some help with the gas station data. I was thinking it would be good to visually compare the average transaction prices for the different segments we have. Can you make a chart for that? I also want to see how much the prices vary within each group, just so we know how reliable the average is. Also, make sure to include the data for next year so we can see where it's heading.",
+    "vis_question_clear": "Compare the average transaction prices for different gas station segments using error bars to show the confidence interval.",
+    "original_question": "What was the average monthly consumption of customers in SME for the year 2013?",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "visualization_ambiguity",
+        "error_correction"
+      ],
+      "template_names": [
+        "chart_type_missing",
+        "data_range_mismatch"
+      ],
+      "target_feature_paths": [
+        "transform.filter",
+        "mark.type"
+      ],
+      "preferred_interface": "ask_user_vis",
+      "difficulty": "medium",
+      "corruption": null
+    },
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Retrieve raw Price data associated with each Gas Station Segment.\n# We join transactions to gasstations to get the Segment for each transaction.\n# Raw data is required to calculate the mean and confidence intervals dynamically in the visualization.\nSQL = \"\"\"\nSELECT \n    T2.Segment,\n    T1.Price\nFROM transactions_1k AS T1\nJOIN gasstations AS T2 ON T1.GasStationID = T2.GasStationID\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# No additional processing needed as aggregation happens in Altair\n\n# Stage 3: Visualization\n# Create points for the mean value\npoints = alt.Chart(df).mark_point(\n    filled=True,\n    color='black'\n).encode(\n    x=alt.X('mean(Price)', title='Average Transaction Price'),\n    y=alt.Y('Segment', sort=alt.EncodingSortField(\n        field='Price',\n        op='mean',\n        order='descending'\n    ), title='Gas Station Segment')\n).properties(\n    width=500,\n    height=300,\n    title='Average Transaction Price by Segment with Confidence Intervals'\n)\n\n# Create error bars showing the confidence interval\nerror_bars = points.mark_rule().encode(\n    x='ci0(Price)',\n    x2='ci1(Price)'\n)\n\n# Combine the layers\nchart = points + error_bars\n\nchart",
+    "vega_lite_spec": {
+      "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json",
+      "config": {
+        "view": {
+          "continuousHeight": 300,
+          "continuousWidth": 300
+        }
+      },
+      "data": {
+        "name": "data-2369fadfb841ce36fa52a5dd3ca901ca"
+      },
+      "datasets": {
+        "data-2369fadfb841ce36fa52a5dd3ca901ca": [
+          {
+            "Price": 672.64,
+            "Segment": "Premium"
+          },
+          {
+            "Price": 430.72,
+            "Segment": "Premium"
+          },
+          {
+            "Price": 121.99,
+            "Segment": "Premium"
+          },
+          {
+            "Price": 120.74,
+            "Segment": "Noname"
+          },
+          {
+            "Price": 645.05,
+            "Segment": "Noname"
+          }
+        ]
+      },
+      "height": 300,
+      "layer": [
+        {
+          "encoding": {
+            "x": {
+              "aggregate": "mean",
+              "field": "Price",
+              "title": "Average Transaction Price",
+              "type": "quantitative"
+            },
+            "y": {
+              "field": "Segment",
+              "sort": {
+                "field": "Price",
+                "op": "mean",
+                "order": "descending"
+              },
+              "title": "Gas Station Segment",
+              "type": "nominal"
+            }
+          },
+          "mark": {
+            "color": "black",
+            "filled": true,
+            "type": "point"
+          },
+          "title": "Average Transaction Price by Segment with Confidence Intervals"
+        },
+        {
+          "encoding": {
+            "x": {
+              "aggregate": "ci0",
+              "field": "Price",
+              "type": "quantitative"
+            },
+            "x2": {
+              "aggregate": "ci1",
+              "field": "Price"
+            },
+            "y": {
+              "field": "Segment",
+              "sort": {
+                "field": "Price",
+                "op": "mean",
+                "order": "descending"
+              },
+              "title": "Gas Station Segment",
+              "type": "nominal"
+            }
+          },
+          "mark": {
+            "type": "rule"
+          },
+          "title": "Average Transaction Price by Segment with Confidence Intervals"
+        }
+      ],
+      "width": 500
+    },
+    "image_path": null,
+    "features": [
+      {
+        "path": "layer",
+        "op": "exists",
+        "value": null
+      },
+      {
+        "path": "layer",
+        "op": "len_ge",
+        "value": 2
+      }
+    ],
+    "required_key_features": [
+      {
+        "id": "kf_agg_mean",
+        "type": "aggregation",
+        "text": "Calculate and show the average transaction price for each gas station segment.",
+        "args": {
+          "aggregate": "mean",
+          "field": "Price",
+          "groupby": "Segment"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_mark_errorbar",
+        "type": "mark",
+        "text": "Display the values using points for the average with error bars (lines) to show the confidence intervals.",
+        "args": {
+          "mark": "point",
+          "layer": "rule"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_sort_desc",
+        "type": "encoding",
+        "text": "Sort the segments so that the one with the highest average price is at the top.",
+        "args": {
+          "sort": "descending",
+          "field": "Price"
+        },
+        "must": true
+      }
+    ],
+    "chart_type": "sorted_error_bars_showing_confidence_interval",
+    "chart_category": "Advanced Calculations",
+    "vis_intent_type": "distribution",
+    "db_id": "debit_card_specializing",
+    "difficulty": "moderate",
+    "validation_passed": true,
+    "data_quality_report": {
+      "suitable": true,
+      "score": 1.0,
+      "issues": [],
+      "suggestions": []
+    },
+    "vlm_validation_report": {
+      "readable": true,
+      "readability_score": 1.0,
+      "chart_type_correct": true,
+      "data_represented_correctly": true,
+      "elements_complete": true,
+      "visual_quality_ok": true,
+      "answers_question": true,
+      "issues": [],
+      "suggestions": []
+    },
+    "chart_image_path": "D:\\Machine_Learning\\Deep_Learning\\Project\\Vis-Interact\\dataset_construct\\output\\temp_images\\q1473_c1.png"
+  },
+  {
+    "sample_id": "q1476_c0",
+    "source_question_id": 1476,
+    "candidate_id": "q1476_c0",
+    "source_instance": {
+      "question_id": 1476,
+      "question": "What was the difference in gas consumption between CZK-paying customers and EUR-paying customers in 2012?",
+      "db_id": "debit_card_specializing",
+      "evidence": "Year 2012 can be presented as Between 201201 And 201212; The first 4 strings of the Date values in the yearmonth table can represent year; Difference in Consumption = CZK customers consumption in 2012 - EUR customers consumption in 2012",
+      "gold_sql": "SELECT SUM(IIF(T1.Currency = 'CZK', T2.Consumption, 0)) - SUM(IIF(T1.Currency = 'EUR', T2.Consumption, 0)) FROM customers AS T1 INNER JOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID WHERE SUBSTR(T2.Date, 1, 4) = '2012'",
+      "difficulty": "challenging"
+    },
+    "candidate": {
+      "candidate_id": "q1476_c0",
+      "chart_type": "normalized_stacked_area_chart",
+      "chart_category": "Area Charts",
+      "vis_intent": "Reveals the changing proportion of total consumption contributed by each customer segment over time.",
+      "vis_intent_type": "composition",
+      "analytical_question": "How does the monthly market share of gas consumption evolve between SME and LAM customer segments?",
+      "tables_needed": [
+        "yearmonth",
+        "customers"
+      ],
+      "data_mapping": {
+        "primary": {
+          "x": "Date (type: temporal)",
+          "y": "Consumption (aggregation: sum)",
+          "color": "Segment"
+        }
+      },
+      "visualization_features": [
+        "aggregation: sum consumption by date and segment",
+        "normalization: stack to 100% height",
+        "time_unit: yearmonth parsing"
+      ],
+      "dimensions": [
+        "Date",
+        "Segment"
+      ],
+      "measures": [
+        "Consumption"
+      ],
+      "aggregation": "COUNT",
+      "features": [
+        {
+          "path": "mark.type",
+          "op": "eq",
+          "value": "area"
+        },
+        {
+          "path": "encoding.x.field",
+          "op": "eq",
+          "value": "Date"
+        },
+        {
+          "path": "encoding.x.type",
+          "op": "eq",
+          "value": "temporal"
+        },
+        {
+          "path": "encoding.y.field",
+          "op": "eq",
+          "value": "Consumption"
+        },
+        {
+          "path": "encoding.y.aggregate",
+          "op": "eq",
+          "value": "count"
+        },
+        {
+          "path": "encoding.y.type",
+          "op": "eq",
+          "value": "quantitative"
+        },
+        {
+          "path": "encoding.color.field",
+          "op": "eq",
+          "value": "Segment"
+        }
+      ],
+      "diversity_score": 0.0
+    },
+    "vis_sql": "",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Query to aggregate consumption by date and customer segment\n# We group by Date and Segment to calculate the total consumption for each group per month\nSQL = \"\"\"\nSELECT \n    T2.Date,\n    T1.Segment,\n    SUM(T2.Consumption) as Consumption\nFROM customers AS T1\nJOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID\nGROUP BY T2.Date, T1.Segment\nORDER BY T2.Date\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert 'Date' column from 'YYYYMM' string format to datetime objects\n# This allows the visualization to correctly interpret the time axis\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')",
+    "vis_question": "I'm putting together the sustainability report for the board meeting and I need to understand our gas usage patterns better. I want to see the share of gas consumption for each customer segment over the years to see who the big users are. Can you make a chart that helps me distinguish the different categories and see how their portion of the total changes? Also, it would be really helpful if we could include the trends up to 2025, since we need to talk about our future targets.",
+    "vis_question_clear": "Visualize the percentage contribution of each customer segment to total gas consumption over time.",
+    "original_question": "What was the difference in gas consumption between CZK-paying customers and EUR-paying customers in 2012?",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "error_correction",
+        "visualization_ambiguity"
+      ],
+      "template_names": [
+        "data_range_mismatch",
+        "encoding_channel_missing"
+      ],
+      "target_feature_paths": [
+        "encoding.color.field",
+        "encoding.shape.field",
+        "transform.filter",
+        "encoding.size.field"
+      ],
+      "preferred_interface": "ask_user_vis",
+      "difficulty": "medium",
+      "corruption": null
+    },
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Query to aggregate consumption by date and customer segment\n# We group by Date and Segment to calculate the total consumption for each group per month\nSQL = \"\"\"\nSELECT \n    T2.Date,\n    T1.Segment,\n    SUM(T2.Consumption) as Consumption\nFROM customers AS T1\nJOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID\nGROUP BY T2.Date, T1.Segment\nORDER BY T2.Date\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert 'Date' column from 'YYYYMM' string format to datetime objects\n# This allows the visualization to correctly interpret the time axis\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')\n\n# Stage 3: Visualization\n# Create a normalized stacked area chart to show percentage contribution over time\nchart = alt.Chart(df).mark_area().encode(\n    x=alt.X('Date:T', title='Date'),\n    # 'stack=\"normalize\"' converts absolute values to percentage (0-1) of the total for that x-value\n    y=alt.Y('Consumption:Q', stack='normalize', title='Percentage of Total Consumption', axis=alt.Axis(format='%')),\n    color=alt.Color('Segment:N', title='Customer Segment'),\n    tooltip=[\n        alt.Tooltip('Date:T', format='%Y-%m'),\n        alt.Tooltip('Segment:N'),\n        alt.Tooltip('Consumption:Q', format=',.2f', title='Consumption')\n    ]\n).properties(\n    title='Percentage Contribution of Each Customer Segment to Gas Consumption',\n    width=600,\n    height=400\n)\n\nchart",
+    "vega_lite_spec": {
+      "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json",
+      "config": {
+        "view": {
+          "continuousHeight": 300,
+          "continuousWidth": 300
+        }
+      },
+      "data": {
+        "name": "data-6482c1c05e8d7238aa81d66bc7b4dbf5"
+      },
+      "datasets": {
+        "data-6482c1c05e8d7238aa81d66bc7b4dbf5": [
+          {
+            "Consumption": 2020.86,
+            "Date": "2011-12-01T00:00:00",
+            "Segment": "KAM"
+          },
+          {
+            "Consumption": 575.79,
+            "Date": "2011-12-01T00:00:00",
+            "Segment": "LAM"
+          },
+          {
+            "Consumption": 1576.01,
+            "Date": "2011-12-01T00:00:00",
+            "Segment": "SME"
+          },
+          {
+            "Consumption": 13783165.3,
+            "Date": "2012-01-01T00:00:00",
+            "Segment": "KAM"
+          },
+          {
+            "Consumption": 12680441.37,
+            "Date": "2012-01-01T00:00:00",
+            "Segment": "LAM"
+          }
+        ]
+      },
+      "encoding": {
+        "color": {
+          "field": "Segment",
+          "title": "Customer Segment",
+          "type": "nominal"
+        },
+        "tooltip": [
+          {
+            "field": "Date",
+            "format": "%Y-%m",
+            "type": "temporal"
+          },
+          {
+            "field": "Segment",
+            "type": "nominal"
+          },
+          {
+            "field": "Consumption",
+            "format": ",.2f",
+            "title": "Consumption",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "field": "Date",
+          "title": "Date",
+          "type": "temporal"
+        },
+        "y": {
+          "axis": {
+            "format": "%"
+          },
+          "field": "Consumption",
+          "stack": "normalize",
+          "title": "Percentage of Total Consumption",
+          "type": "quantitative"
+        }
+      },
+      "height": 400,
+      "mark": {
+        "type": "area"
+      },
+      "title": "Percentage Contribution of Each Customer Segment to Gas Consumption",
+      "width": 600
+    },
+    "image_path": null,
+    "features": [
+      {
+        "path": "mark.type",
+        "op": "eq",
+        "value": "area"
+      },
+      {
+        "path": "encoding.color.field",
+        "op": "eq",
+        "value": "Segment"
+      },
+      {
+        "path": "encoding.color.type",
+        "op": "eq",
+        "value": "nominal"
+      },
+      {
+        "path": "encoding.x.field",
+        "op": "eq",
+        "value": "Date"
+      },
+      {
+        "path": "encoding.x.type",
+        "op": "eq",
+        "value": "temporal"
+      },
+      {
+        "path": "encoding.y.field",
+        "op": "eq",
+        "value": "Consumption"
+      },
+      {
+        "path": "encoding.y.type",
+        "op": "eq",
+        "value": "quantitative"
+      }
+    ],
+    "required_key_features": [
+      {
+        "id": "kf_mark_area",
+        "type": "mark",
+        "text": "Use a 100% stacked area chart to visualize the data.",
+        "args": {
+          "mark": "area"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_y_normalize",
+        "type": "encoding",
+        "text": "Show the vertical axis as the percentage of total consumption (market share) rather than raw numbers.",
+        "args": {
+          "channel": "y",
+          "field": "Consumption",
+          "stack": "normalize"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_color",
+        "type": "encoding",
+        "text": "Differentiate the various Customer Segments by color.",
+        "args": {
+          "channel": "color",
+          "field": "Segment"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_x",
+        "type": "encoding",
+        "text": "Plot the timeline along the horizontal axis.",
+        "args": {
+          "channel": "x",
+          "field": "Date"
+        },
+        "must": true
+      }
+    ],
+    "chart_type": "normalized_stacked_area_chart",
+    "chart_category": "Area Charts",
+    "vis_intent_type": "composition",
+    "db_id": "debit_card_specializing",
+    "difficulty": "challenging",
+    "validation_passed": true,
+    "data_quality_report": {
+      "suitable": true,
+      "score": 1.0,
+      "issues": [],
+      "suggestions": []
+    },
+    "vlm_validation_report": {
+      "readable": true,
+      "readability_score": 1.0,
+      "chart_type_correct": true,
+      "data_represented_correctly": true,
+      "elements_complete": true,
+      "visual_quality_ok": true,
+      "answers_question": true,
+      "issues": [],
+      "suggestions": [
+        "Consider adding a specific date format to the X-axis labels (e.g., `axis=alt.Axis(format='%b %Y')` inside `alt.X`) to explicitly show the year, as the current labels repeat months (December, April, August) across the timeline."
+      ]
+    },
+    "chart_image_path": "D:\\Machine_Learning\\Deep_Learning\\Project\\Vis-Interact\\dataset_construct\\output\\temp_images\\q1476_c0.png"
+  },
+  {
+    "sample_id": "q1472_c0",
+    "source_question_id": 1472,
+    "candidate_id": "q1472_c0",
+    "source_instance": {
+      "question_id": 1472,
+      "question": "In 2012, who had the least consumption in LAM?",
+      "db_id": "debit_card_specializing",
+      "evidence": "Year 2012 can be presented as Between 201201 And 201212; The first 4 strings of the Date values in the yearmonth table can represent year.",
+      "gold_sql": "SELECT T1.CustomerID FROM customers AS T1 INNER JOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.Segment = 'LAM' AND SUBSTR(T2.Date, 1, 4) = '2012' GROUP BY T1.CustomerID ORDER BY SUM(T2.Consumption) ASC LIMIT 1",
+      "difficulty": "moderate"
+    },
+    "candidate": {
+      "candidate_id": "q1472_c0",
+      "chart_type": "normalized_stacked_area_chart",
+      "chart_category": "Area Charts",
+      "vis_intent": "Visualizing the changing composition of consumption market share between customer segments over time.",
+      "vis_intent_type": "composition",
+      "analytical_question": "How has the relative market share of total consumption between 'SME' and 'LAM' customer segments evolved month-over-month?",
+      "tables_needed": [
+        "customers",
+        "yearmonth"
+      ],
+      "data_mapping": {
+        "primary": {
+          "x": "Date (type: temporal)",
+          "y": "Consumption (aggregation: sum)",
+          "color": "Segment"
+        }
+      },
+      "visualization_features": [
+        "aggregation: sum Consumption by Date and Segment",
+        "normalization: stack values to 100% to show relative share",
+        "time_unit: parse YYYYMM format to date"
+      ],
+      "dimensions": [
+        "Date",
+        "Segment"
+      ],
+      "measures": [
+        "Consumption"
+      ],
+      "aggregation": "COUNT",
+      "features": [
+        {
+          "path": "mark.type",
+          "op": "eq",
+          "value": "area"
+        },
+        {
+          "path": "encoding.x.field",
+          "op": "eq",
+          "value": "Date"
+        },
+        {
+          "path": "encoding.x.type",
+          "op": "eq",
+          "value": "temporal"
+        },
+        {
+          "path": "encoding.y.field",
+          "op": "eq",
+          "value": "Consumption"
+        },
+        {
+          "path": "encoding.y.aggregate",
+          "op": "eq",
+          "value": "count"
+        },
+        {
+          "path": "encoding.y.type",
+          "op": "eq",
+          "value": "quantitative"
+        },
+        {
+          "path": "encoding.color.field",
+          "op": "eq",
+          "value": "Segment"
+        }
+      ],
+      "diversity_score": 0.0
+    },
+    "vis_sql": "",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Join customers and yearmonth tables to get consumption details per segment\n# Group by Date and Segment to calculate total consumption for the stacked area chart\nSQL = \"\"\"\nSELECT \n    T2.Date,\n    T1.Segment,\n    SUM(T2.Consumption) AS Consumption\nFROM customers AS T1\nJOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID\nGROUP BY T2.Date, T1.Segment\nORDER BY T2.Date\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert YYYYMM string format to datetime objects for proper temporal scaling on the x-axis\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')",
+    "vis_question": "Hey, I'm pulling together some slides for the quarterly review and I need to show how our consumption market share is looking. Can you whip up a visual that breaks down the share by customer segment? I basically want to see how the split between segments has changed over time to see if there are any interesting patterns or trends we should know about.",
+    "vis_question_clear": "Visualize the evolution of consumption market share across customer segments over time.",
+    "original_question": "In 2012, who had the least consumption in LAM?",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "data_ambiguity"
+      ],
+      "template_names": [
+        "time_granularity_missing"
+      ],
+      "target_feature_paths": [
+        "encoding.x.timeUnit",
+        "encoding.y.timeUnit"
+      ],
+      "preferred_interface": "ask_user_text",
+      "difficulty": "easy",
+      "corruption": null
+    },
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Data retrieval\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Join customers and yearmonth tables to get consumption details per segment\n# Group by Date and Segment to calculate total consumption for the stacked area chart\nSQL = \"\"\"\nSELECT \n    T2.Date,\n    T1.Segment,\n    SUM(T2.Consumption) AS Consumption\nFROM customers AS T1\nJOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID\nGROUP BY T2.Date, T1.Segment\nORDER BY T2.Date\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert YYYYMM string format to datetime objects for proper temporal scaling on the x-axis\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')\n\n# Stage 3: Visualization\nchart = alt.Chart(df).mark_area().encode(\n    x=alt.X('Date:T', title='Date'),\n    y=alt.Y('Consumption:Q', stack='normalize', title='Share of Consumption', axis=alt.Axis(format='%')),\n    color=alt.Color('Segment:N', title='Customer Segment'),\n    tooltip=[\n        alt.Tooltip('Date:T', format='%Y-%m'),\n        'Segment',\n        alt.Tooltip('Consumption:Q', format=',.2f')\n    ]\n).properties(\n    title='Evolution of Consumption Market Share Across Customer Segments',\n    width=600,\n    height=400\n)\n\nchart",
+    "vega_lite_spec": {
+      "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json",
+      "config": {
+        "view": {
+          "continuousHeight": 300,
+          "continuousWidth": 300
+        }
+      },
+      "data": {
+        "name": "data-6482c1c05e8d7238aa81d66bc7b4dbf5"
+      },
+      "datasets": {
+        "data-6482c1c05e8d7238aa81d66bc7b4dbf5": [
+          {
+            "Consumption": 2020.86,
+            "Date": "2011-12-01T00:00:00",
+            "Segment": "KAM"
+          },
+          {
+            "Consumption": 575.79,
+            "Date": "2011-12-01T00:00:00",
+            "Segment": "LAM"
+          },
+          {
+            "Consumption": 1576.01,
+            "Date": "2011-12-01T00:00:00",
+            "Segment": "SME"
+          },
+          {
+            "Consumption": 13783165.3,
+            "Date": "2012-01-01T00:00:00",
+            "Segment": "KAM"
+          },
+          {
+            "Consumption": 12680441.37,
+            "Date": "2012-01-01T00:00:00",
+            "Segment": "LAM"
+          }
+        ]
+      },
+      "encoding": {
+        "color": {
+          "field": "Segment",
+          "title": "Customer Segment",
+          "type": "nominal"
+        },
+        "tooltip": [
+          {
+            "field": "Date",
+            "format": "%Y-%m",
+            "type": "temporal"
+          },
+          {
+            "field": "Segment",
+            "type": "nominal"
+          },
+          {
+            "field": "Consumption",
+            "format": ",.2f",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "field": "Date",
+          "title": "Date",
+          "type": "temporal"
+        },
+        "y": {
+          "axis": {
+            "format": "%"
+          },
+          "field": "Consumption",
+          "stack": "normalize",
+          "title": "Share of Consumption",
+          "type": "quantitative"
+        }
+      },
+      "height": 400,
+      "mark": {
+        "type": "area"
+      },
+      "title": "Evolution of Consumption Market Share Across Customer Segments",
+      "width": 600
+    },
+    "image_path": null,
+    "features": [
+      {
+        "path": "mark.type",
+        "op": "eq",
+        "value": "area"
+      },
+      {
+        "path": "encoding.color.field",
+        "op": "eq",
+        "value": "Segment"
+      },
+      {
+        "path": "encoding.color.type",
+        "op": "eq",
+        "value": "nominal"
+      },
+      {
+        "path": "encoding.x.field",
+        "op": "eq",
+        "value": "Date"
+      },
+      {
+        "path": "encoding.x.type",
+        "op": "eq",
+        "value": "temporal"
+      },
+      {
+        "path": "encoding.y.field",
+        "op": "eq",
+        "value": "Consumption"
+      },
+      {
+        "path": "encoding.y.type",
+        "op": "eq",
+        "value": "quantitative"
+      }
+    ],
+    "required_key_features": [
+      {
+        "id": "kf_mark_area_normalized",
+        "type": "mark",
+        "text": "Create a 100% stacked area chart to visualize the market share composition.",
+        "args": {
+          "mark": "area",
+          "properties": {
+            "stack": "normalize"
+          }
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_x_date",
+        "type": "encoding",
+        "text": "Plot the timeline along the x-axis using the Date field.",
+        "args": {
+          "channel": "x",
+          "field": "Date"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_y_consumption_pct",
+        "type": "encoding",
+        "text": "Represent the Share of Consumption as a percentage on the y-axis.",
+        "args": {
+          "channel": "y",
+          "field": "Consumption",
+          "format": "%"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_color_segment",
+        "type": "encoding",
+        "text": "Differentiate the Customer Segments using distinct colors.",
+        "args": {
+          "channel": "color",
+          "field": "Segment"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_interaction_tooltip",
+        "type": "interaction",
+        "text": "Show details for Date, Segment, and Consumption when hovering over the chart.",
+        "args": {
+          "tooltip": [
+            "Date",
+            "Segment",
+            "Consumption"
+          ]
+        },
+        "must": false
+      }
+    ],
+    "chart_type": "normalized_stacked_area_chart",
+    "chart_category": "Area Charts",
+    "vis_intent_type": "composition",
+    "db_id": "debit_card_specializing",
+    "difficulty": "moderate",
+    "validation_passed": true,
+    "data_quality_report": {
+      "suitable": true,
+      "score": 1.0,
+      "issues": [],
+      "suggestions": []
+    },
+    "vlm_validation_report": {
+      "readable": true,
+      "readability_score": 1.0,
+      "chart_type_correct": true,
+      "data_represented_correctly": true,
+      "elements_complete": true,
+      "visual_quality_ok": true,
+      "answers_question": true,
+      "issues": [],
+      "suggestions": [
+        "Consider adding an explicit date format to the X-axis labels (e.g., `axis=alt.Axis(format='%b %Y')` inside `alt.X()`) to clearly distinguish the years, as the current labels only show repeating month names."
+      ]
+    },
+    "chart_image_path": "D:\\Machine_Learning\\Deep_Learning\\Project\\Vis-Interact\\dataset_construct\\output\\temp_images\\q1472_c0.png"
+  },
+  {
+    "sample_id": "q1471_c1",
+    "source_question_id": 1471,
+    "candidate_id": "q1471_c1",
+    "source_instance": {
+      "question_id": 1471,
+      "question": "What is the ratio of customers who pay in EUR against customers who pay in CZK?",
+      "db_id": "debit_card_specializing",
+      "evidence": "ratio of customers who pay in EUR against customers who pay in CZK = count(Currency = 'EUR') / count(Currency = 'CZK').",
+      "gold_sql": "SELECT CAST(SUM(IIF(Currency = 'EUR', 1, 0)) AS FLOAT) / SUM(IIF(Currency = 'CZK', 1, 0)) AS ratio FROM customers",
+      "difficulty": "simple"
+    },
+    "candidate": {
+      "candidate_id": "q1471_c1",
+      "chart_type": "sorted_bar_chart",
+      "chart_category": "Bar Charts",
+      "vis_intent": "Ranks gas station chains by their financial performance to identify top partners.",
+      "vis_intent_type": "ranking",
+      "analytical_question": "Which gas station chains generate the highest total transaction revenue?",
+      "tables_needed": [
+        "gasstations",
+        "transactions_1k"
+      ],
+      "data_mapping": {
+        "primary": {
+          "x": "Price (aggregation: sum)",
+          "y": "ChainID (type: nominal)"
+        }
+      },
+      "visualization_features": [
+        "sorting: descending by x-axis value",
+        "aggregation: sum price"
+      ],
+      "dimensions": [
+        "Price"
+      ],
+      "measures": [
+        "ChainID"
+      ],
+      "aggregation": "COUNT",
+      "features": [
+        {
+          "path": "mark.type",
+          "op": "eq",
+          "value": "bar"
+        },
+        {
+          "path": "encoding.x.field",
+          "op": "eq",
+          "value": "Price"
+        },
+        {
+          "path": "encoding.x.type",
+          "op": "eq",
+          "value": "quantitative"
+        },
+        {
+          "path": "encoding.y.field",
+          "op": "eq",
+          "value": "ChainID"
+        },
+        {
+          "path": "encoding.y.aggregate",
+          "op": "eq",
+          "value": "count"
+        },
+        {
+          "path": "encoding.y.type",
+          "op": "eq",
+          "value": "quantitative"
+        }
+      ],
+      "diversity_score": 0.0
+    },
+    "vis_sql": "",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Calculate the total financial performance (Sum of Price) for each ChainID\n# Join 'transactions_1k' with 'gasstations' to link transactions to specific chains\nSQL = \"\"\"\nSELECT \n    g.ChainID, \n    SUM(t.Price) AS TotalPrice\nFROM transactions_1k AS t\nJOIN gasstations AS g ON t.GasStationID = g.GasStationID\nGROUP BY g.ChainID\nORDER BY TotalPrice DESC\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert ChainID to string so it is treated as a nominal category in the visualization\ndf['ChainID'] = df['ChainID'].astype(str)",
+    "vis_question": "I'm working on the financial overview for the stakeholders and I need to see a breakdown of performance. Can you show me a chart that ranks the gas station brands? I specifically want to see them ordered by the `net_profit` field. I know we track the transaction prices, so just use that to show me who is making the most. It's really important that I see the top earners clearly so I can put it in my report.",
+    "vis_question_clear": "Rank the gas station chains by their total generated revenue based on transaction prices.",
+    "original_question": "What is the ratio of customers who pay in EUR against customers who pay in CZK?",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "error_correction",
+        "visualization_ambiguity"
+      ],
+      "template_names": [
+        "field_name_error",
+        "axis_assignment_missing"
+      ],
+      "target_feature_paths": [
+        "encoding.*.field",
+        "encoding.x.field",
+        "encoding.y.field"
+      ],
+      "preferred_interface": "ask_user_vis",
+      "difficulty": "medium",
+      "corruption": null
+    },
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Data retrieval\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Calculate the total financial performance (Sum of Price) for each ChainID\n# Join 'transactions_1k' with 'gasstations' to link transactions to specific chains\nSQL = \"\"\"\nSELECT \n    g.ChainID, \n    SUM(t.Price) AS TotalPrice\nFROM transactions_1k AS t\nJOIN gasstations AS g ON t.GasStationID = g.GasStationID\nGROUP BY g.ChainID\nORDER BY TotalPrice DESC\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert ChainID to string so it is treated as a nominal category in the visualization\ndf['ChainID'] = df['ChainID'].astype(str)\n\n# Stage 3: Visualization\nchart = alt.Chart(df).mark_bar().encode(\n    x=alt.X('TotalPrice:Q', title='Total Revenue'),\n    y=alt.Y('ChainID:N', sort='-x', title='Chain ID'),\n    tooltip=[\n        alt.Tooltip('ChainID', title='Chain ID'),\n        alt.Tooltip('TotalPrice', title='Total Revenue', format=',.2f')\n    ]\n).properties(\n    title='Gas Station Chains Ranked by Total Revenue',\n    width=600,\n    height=400\n)\n\nchart",
+    "vega_lite_spec": {
+      "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json",
+      "config": {
+        "view": {
+          "continuousHeight": 300,
+          "continuousWidth": 300
+        }
+      },
+      "data": {
+        "name": "data-ec53fbc13f593942cb05d460dbe57e44"
+      },
+      "datasets": {
+        "data-ec53fbc13f593942cb05d460dbe57e44": [
+          {
+            "ChainID": "4",
+            "TotalPrice": 119912.99
+          },
+          {
+            "ChainID": "2",
+            "TotalPrice": 51853.13
+          },
+          {
+            "ChainID": "1",
+            "TotalPrice": 43745.52
+          },
+          {
+            "ChainID": "33",
+            "TotalPrice": 43667.22
+          },
+          {
+            "ChainID": "6",
+            "TotalPrice": 38092.4
+          }
+        ]
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "ChainID",
+            "title": "Chain ID",
+            "type": "nominal"
+          },
+          {
+            "field": "TotalPrice",
+            "format": ",.2f",
+            "title": "Total Revenue",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "field": "TotalPrice",
+          "title": "Total Revenue",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "ChainID",
+          "sort": "-x",
+          "title": "Chain ID",
+          "type": "nominal"
+        }
+      },
+      "height": 400,
+      "mark": {
+        "type": "bar"
+      },
+      "title": "Gas Station Chains Ranked by Total Revenue",
+      "width": 600
+    },
+    "image_path": null,
+    "features": [
+      {
+        "path": "mark.type",
+        "op": "eq",
+        "value": "bar"
+      },
+      {
+        "path": "encoding.x.field",
+        "op": "eq",
+        "value": "TotalPrice"
+      },
+      {
+        "path": "encoding.x.type",
+        "op": "eq",
+        "value": "quantitative"
+      },
+      {
+        "path": "encoding.y.field",
+        "op": "eq",
+        "value": "ChainID"
+      },
+      {
+        "path": "encoding.y.type",
+        "op": "eq",
+        "value": "nominal"
+      }
+    ],
+    "required_key_features": [
+      {
+        "id": "kf_mark_bar",
+        "type": "mark",
+        "text": "Visualize this data using a bar chart.",
+        "args": {
+          "mark": "bar"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_fields",
+        "type": "encoding",
+        "text": "Show the Total Revenue for each gas station Chain ID.",
+        "args": {
+          "x": "TotalPrice",
+          "y": "ChainID"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_sort_rank",
+        "type": "encoding",
+        "text": "Rank the chains by sorting them from highest revenue to lowest.",
+        "args": {
+          "sort": "descending",
+          "field": "TotalPrice"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_tooltip_details",
+        "type": "interaction",
+        "text": "Show me the specific Chain ID and formatted revenue amount when I hover over a bar.",
+        "args": {
+          "tooltip": [
+            "ChainID",
+            "TotalPrice"
+          ]
+        },
+        "must": false
+      }
+    ],
+    "chart_type": "sorted_bar_chart",
+    "chart_category": "Bar Charts",
+    "vis_intent_type": "ranking",
+    "db_id": "debit_card_specializing",
+    "difficulty": "simple",
+    "validation_passed": true,
+    "data_quality_report": {
+      "suitable": true,
+      "score": 0.95,
+      "issues": [
+        "The result contains 33 rows, which is slightly high for a static bar chart and may result in a crowded visualization or require scrolling."
+      ],
+      "suggestions": [
+        "Consider adding `LIMIT 20` to the SQL query (e.g., `ORDER BY TotalPrice DESC LIMIT 20`) to focus on the top-performing chains and improve chart readability."
+      ]
+    },
+    "vlm_validation_report": {
+      "readable": true,
+      "readability_score": 1.0,
+      "chart_type_correct": true,
+      "data_represented_correctly": true,
+      "elements_complete": true,
+      "visual_quality_ok": true,
+      "answers_question": true,
+      "issues": [],
+      "suggestions": []
+    },
+    "chart_image_path": "D:\\Machine_Learning\\Deep_Learning\\Project\\Vis-Interact\\dataset_construct\\output\\temp_images\\q1471_c1.png"
+  },
+  {
+    "sample_id": "q1479_c0",
+    "source_question_id": 1479,
+    "candidate_id": "q1479_c0",
+    "source_instance": {
+      "question_id": 1479,
+      "question": "Which year recorded the most consumption of gas paid in CZK?",
+      "db_id": "debit_card_specializing",
+      "evidence": "The first 4 strings of the Date values in the yearmonth table can represent year.",
+      "gold_sql": "SELECT SUBSTR(T2.Date, 1, 4) FROM customers AS T1 INNER JOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.Currency = 'CZK' GROUP BY SUBSTR(T2.Date, 1, 4) ORDER BY SUM(T2.Consumption) DESC LIMIT 1",
+      "difficulty": "moderate"
+    },
+    "candidate": {
+      "candidate_id": "q1479_c0",
+      "chart_type": "calculate_residuals",
+      "chart_category": "Advanced Calculations",
+      "vis_intent": "To identify specific months where gas consumption was significantly higher or lower than the long-term average.",
+      "vis_intent_type": "trend",
+      "analytical_question": "How does the total monthly gas consumption for CZK customers deviate from the average monthly consumption across the entire period?",
+      "tables_needed": [
+        "customers",
+        "yearmonth"
+      ],
+      "data_mapping": {
+        "primary": {
+          "x": "Date (type: temporal)",
+          "y": "Consumption_Delta (aggregation: calculated)",
+          "color": "Consumption_Delta"
+        }
+      },
+      "visualization_features": [
+        "aggregation: mean of total monthly consumption",
+        "calculate: difference between actual monthly sum and average",
+        "filter: Currency = 'CZK'"
+      ],
+      "dimensions": [
+        "Date",
+        "Consumption_Delta"
+      ],
+      "measures": [
+        "Consumption_Delta"
+      ],
+      "aggregation": "COUNT",
+      "features": [
+        {
+          "path": "mark.type",
+          "op": "eq",
+          "value": "bar"
+        },
+        {
+          "path": "encoding.x.field",
+          "op": "eq",
+          "value": "Date"
+        },
+        {
+          "path": "encoding.x.type",
+          "op": "eq",
+          "value": "temporal"
+        },
+        {
+          "path": "encoding.y.field",
+          "op": "eq",
+          "value": "Consumption_Delta"
+        },
+        {
+          "path": "encoding.y.aggregate",
+          "op": "eq",
+          "value": "count"
+        },
+        {
+          "path": "encoding.y.type",
+          "op": "eq",
+          "value": "quantitative"
+        },
+        {
+          "path": "encoding.color.field",
+          "op": "eq",
+          "value": "Consumption_Delta"
+        },
+        {
+          "path": "encoding.color.type",
+          "op": "eq",
+          "value": "quantitative"
+        },
+        {
+          "path": "transform",
+          "op": "exists",
+          "value": null
+        },
+        {
+          "path": "transform[0].filter",
+          "op": "exists",
+          "value": null
+        },
+        {
+          "path": "transform[1].filter",
+          "op": "exists",
+          "value": null
+        },
+        {
+          "path": "transform[2].joinaggregate",
+          "op": "exists",
+          "value": null
+        },
+        {
+          "path": "transform[3].calculate",
+          "op": "exists",
+          "value": null
+        }
+      ],
+      "diversity_score": 0.0
+    },
+    "vis_sql": "",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Calculate total consumption per month for customers paying in CZK\nSQL = \"\"\"\nSELECT \n    T2.Date, \n    SUM(T2.Consumption) AS Monthly_Consumption\nFROM customers AS T1 \nJOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID \nWHERE T1.Currency = 'CZK' \nGROUP BY T2.Date \nORDER BY T2.Date\n\"\"\"\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert 'YYYYMM' string format to datetime objects for temporal plotting\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')\n\n# Calculate the long-term average monthly consumption\naverage_consumption = df['Monthly_Consumption'].mean()\n\n# Calculate the residual (delta) for each month: Actual - Average\ndf['Consumption_Delta'] = df['Monthly_Consumption'] - average_consumption",
+    "vis_question": "I've been looking into our expenses for the upcoming client meeting, and I think we need a graphic to explain the variance in our energy spending. Can you visualize the gas_cost_czk for me? I specifically want to show the monthly deviation from the average monthly usage. It would be great to just see how far off each month is from the average, you know? Just a simple visual to highlight the months where we paid way more or less than usual.",
+    "vis_question_clear": "Visualize the monthly deviation of gas consumption paid in CZK from the average monthly consumption.",
+    "original_question": "Which year recorded the most consumption of gas paid in CZK?",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "visualization_ambiguity",
+        "error_correction"
+      ],
+      "template_names": [
+        "chart_type_missing",
+        "field_name_error"
+      ],
+      "target_feature_paths": [
+        "encoding.*.field",
+        "mark.type"
+      ],
+      "preferred_interface": "ask_user_vis",
+      "difficulty": "medium",
+      "corruption": null
+    },
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Data retrieval\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Calculate total consumption per month for customers paying in CZK\nSQL = \"\"\"\nSELECT \n    T2.Date, \n    SUM(T2.Consumption) AS Monthly_Consumption\nFROM customers AS T1 \nJOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID \nWHERE T1.Currency = 'CZK' \nGROUP BY T2.Date \nORDER BY T2.Date\n\"\"\"\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert 'YYYYMM' string format to datetime objects for temporal plotting\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')\n\n# Calculate the long-term average monthly consumption\naverage_consumption = df['Monthly_Consumption'].mean()\n\n# Calculate the residual (delta) for each month: Actual - Average\ndf['Consumption_Delta'] = df['Monthly_Consumption'] - average_consumption\n\n# Stage 3: Visualization\nchart = alt.Chart(df).mark_bar().encode(\n    x=alt.X(\"Date:T\", title=\"Date\"),\n    y=alt.Y(\"Consumption_Delta:Q\", title=\"Consumption Deviation\"),\n    color=alt.Color(\"Consumption_Delta:Q\", title=\"Deviation\").scale(domainMid=0),\n    tooltip=[\n        alt.Tooltip(\"Date:T\", title=\"Date\", format=\"%Y-%m\"),\n        alt.Tooltip(\"Monthly_Consumption:Q\", title=\"Monthly Consumption\", format=\",.0f\"),\n        alt.Tooltip(\"Consumption_Delta:Q\", title=\"Deviation\", format=\",.0f\")\n    ]\n).properties(\n    title=\"Monthly Deviation of Gas Consumption from Average (CZK)\",\n    width=600,\n    height=400\n)\n\nchart",
+    "vega_lite_spec": {
+      "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json",
+      "config": {
+        "view": {
+          "continuousHeight": 300,
+          "continuousWidth": 300
+        }
+      },
+      "data": {
+        "name": "data-9ba30fa993847f4cb6d5de1859ee844f"
+      },
+      "datasets": {
+        "data-9ba30fa993847f4cb6d5de1859ee844f": [
+          {
+            "Consumption_Delta": -161781227.76666665,
+            "Date": "2011-12-01T00:00:00",
+            "Monthly_Consumption": 3447.83
+          },
+          {
+            "Consumption_Delta": -118010922.21666667,
+            "Date": "2012-01-01T00:00:00",
+            "Monthly_Consumption": 43773753.38
+          },
+          {
+            "Consumption_Delta": -113586578.16666666,
+            "Date": "2012-02-01T00:00:00",
+            "Monthly_Consumption": 48198097.43
+          },
+          {
+            "Consumption_Delta": -110319254.31666666,
+            "Date": "2012-03-01T00:00:00",
+            "Monthly_Consumption": 51465421.28
+          },
+          {
+            "Consumption_Delta": -114944577.84666666,
+            "Date": "2012-04-01T00:00:00",
+            "Monthly_Consumption": 46840097.75
+          }
+        ]
+      },
+      "encoding": {
+        "color": {
+          "field": "Consumption_Delta",
+          "scale": {
+            "domainMid": 0
+          },
+          "title": "Deviation",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {
+            "field": "Date",
+            "format": "%Y-%m",
+            "title": "Date",
+            "type": "temporal"
+          },
+          {
+            "field": "Monthly_Consumption",
+            "format": ",.0f",
+            "title": "Monthly Consumption",
+            "type": "quantitative"
+          },
+          {
+            "field": "Consumption_Delta",
+            "format": ",.0f",
+            "title": "Deviation",
+            "type": "quantitative"
+          }
+        ],
+        "x": {
+          "field": "Date",
+          "title": "Date",
+          "type": "temporal"
+        },
+        "y": {
+          "field": "Consumption_Delta",
+          "title": "Consumption Deviation",
+          "type": "quantitative"
+        }
+      },
+      "height": 400,
+      "mark": {
+        "type": "bar"
+      },
+      "title": "Monthly Deviation of Gas Consumption from Average (CZK)",
+      "width": 600
+    },
+    "image_path": null,
+    "features": [
+      {
+        "path": "mark.type",
+        "op": "eq",
+        "value": "bar"
+      },
+      {
+        "path": "encoding.color.field",
+        "op": "eq",
+        "value": "Consumption_Delta"
+      },
+      {
+        "path": "encoding.color.type",
+        "op": "eq",
+        "value": "quantitative"
+      },
+      {
+        "path": "encoding.x.field",
+        "op": "eq",
+        "value": "Date"
+      },
+      {
+        "path": "encoding.x.type",
+        "op": "eq",
+        "value": "temporal"
+      },
+      {
+        "path": "encoding.y.field",
+        "op": "eq",
+        "value": "Consumption_Delta"
+      },
+      {
+        "path": "encoding.y.type",
+        "op": "eq",
+        "value": "quantitative"
+      }
+    ],
+    "required_key_features": [
+      {
+        "id": "kf_mark_bar",
+        "type": "mark",
+        "text": "I want to see a bar chart to visualize the deviations.",
+        "args": {
+          "mark": "bar"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_x",
+        "type": "encoding",
+        "text": "Display the timeline by date across the bottom.",
+        "args": {
+          "channel": "x",
+          "field": "Date"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_y",
+        "type": "encoding",
+        "text": "Map the vertical height of the bars to the Consumption Deviation (the difference from the average).",
+        "args": {
+          "channel": "y",
+          "field": "Consumption_Delta"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_color",
+        "type": "encoding",
+        "text": "Color the bars based on the deviation amount so I can easily distinguish positive and negative values.",
+        "args": {
+          "channel": "color",
+          "field": "Consumption_Delta"
+        },
+        "must": false
+      },
+      {
+        "id": "kf_tooltip",
+        "type": "interaction",
+        "text": "Include tooltips that show the Date, Monthly Consumption, and Deviation when I hover over a bar.",
+        "args": {
+          "channel": "tooltip",
+          "fields": [
+            "Date",
+            "Monthly_Consumption",
+            "Consumption_Delta"
+          ]
+        },
+        "must": false
+      }
+    ],
+    "chart_type": "calculate_residuals",
+    "chart_category": "Advanced Calculations",
+    "vis_intent_type": "trend",
+    "db_id": "debit_card_specializing",
+    "difficulty": "moderate",
+    "validation_passed": true,
+    "data_quality_report": {
+      "suitable": true,
+      "score": 1.0,
+      "issues": [],
+      "suggestions": []
+    },
+    "vlm_validation_report": {
+      "readable": true,
+      "readability_score": 0.85,
+      "chart_type_correct": true,
+      "data_represented_correctly": true,
+      "elements_complete": true,
+      "visual_quality_ok": true,
+      "answers_question": true,
+      "issues": [
+        "X-axis labels are ambiguous; month names (e.g., 'December', 'February') repeat without year indicators, making it difficult to distinguish the specific timeframe across multiple years."
+      ],
+      "suggestions": [
+        "Modify the X-axis encoding to explicitly include the year in the label format. For example, use `axis=alt.Axis(format='%b %Y')` within `alt.X()`."
+      ]
+    },
+    "chart_image_path": "D:\\Machine_Learning\\Deep_Learning\\Project\\Vis-Interact\\dataset_construct\\output\\temp_images\\q1479_c0.png"
+  },
+  {
+    "sample_id": "q1479_c2",
+    "source_question_id": 1479,
+    "candidate_id": "q1479_c2",
+    "source_instance": {
+      "question_id": 1479,
+      "question": "Which year recorded the most consumption of gas paid in CZK?",
+      "db_id": "debit_card_specializing",
+      "evidence": "The first 4 strings of the Date values in the yearmonth table can represent year.",
+      "gold_sql": "SELECT SUBSTR(T2.Date, 1, 4) FROM customers AS T1 INNER JOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID WHERE T1.Currency = 'CZK' GROUP BY SUBSTR(T2.Date, 1, 4) ORDER BY SUM(T2.Consumption) DESC LIMIT 1",
+      "difficulty": "moderate"
+    },
+    "candidate": {
+      "candidate_id": "q1479_c2",
+      "chart_type": "polynomial_fit_plot_with_regression_transform",
+      "chart_category": "Uncertainties And Trends",
+      "vis_intent": "To visualize the fluctuation of fuel prices over individual transactions and overlay regression models to see the general trend direction.",
+      "vis_intent_type": "trend",
+      "analytical_question": "What are the underlying price trends for fuel transactions over time, modeled with varying degrees of complexity?",
+      "tables_needed": [
+        "transactions_1k"
+      ],
+      "data_mapping": {
+        "primary": {
+          "x": "Date (type: temporal)",
+          "y": "Price (type: quantitative)"
+        },
+        "layers": [
+          {
+            "type": "scatter",
+            "mark_description": "individual transaction prices"
+          },
+          {
+            "type": "line",
+            "mark_description": "polynomial regression lines of degrees 1, 3, and 5"
+          }
+        ]
+      },
+      "visualization_features": [
+        "transform_regression: polynomial method with multiple orders",
+        "transform_fold: flatten regression results for layering",
+        "color: distinguish regression degrees"
+      ],
+      "dimensions": [
+        "Date"
+      ],
+      "measures": [
+        "Price"
+      ],
+      "aggregation": "COUNT",
+      "features": [
+        {
+          "path": "mark.type",
+          "op": "eq",
+          "value": "bar"
+        },
+        {
+          "path": "encoding.x.field",
+          "op": "eq",
+          "value": "Date"
+        },
+        {
+          "path": "encoding.x.type",
+          "op": "eq",
+          "value": "temporal"
+        },
+        {
+          "path": "encoding.y.field",
+          "op": "eq",
+          "value": "Price"
+        },
+        {
+          "path": "encoding.y.aggregate",
+          "op": "eq",
+          "value": "count"
+        },
+        {
+          "path": "encoding.y.type",
+          "op": "eq",
+          "value": "quantitative"
+        }
+      ],
+      "diversity_score": 0.0
+    },
+    "vis_sql": "",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL\n# Retrieve Date, Time, and Price.\n# We use ORDER BY RANDOM() to get a representative random sample of transactions \n# rather than a sequential chunk, and LIMIT 80 to ensure the dataset size is \n# optimal for visualization (within the 5-100 rows requirement).\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\nSQL = \"SELECT Date, Time, Price FROM transactions_1k ORDER BY RANDOM() LIMIT 80\"\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas\n# The 'Date' column alone has very low cardinality (only 4 distinct days), which makes \n# polynomial regression unstable. We combine 'Date' and 'Time' to create a precise \n# timestamp, providing high granularity for the X-axis.\ndf['Date'] = pd.to_datetime(df['Date'].astype(str) + ' ' + df['Time'].astype(str))\n\n# Filter to relevant columns and sort chronologically\ndf = df[['Date', 'Price']].sort_values('Date')",
+    "vis_question": "I've been looking at our numbers for the upcoming strategy meeting, and I really need to get a better handle on how our transaction prices have been moving around lately. Could you put together a visual for me that shows the price fluctuations? I'm trying to spot the general direction we're heading, essentially the big picture trend. It would be super helpful if you could project this out through 2025 as well, so I can show the client where we expect things to land.",
+    "vis_question_clear": "Show me the fluctuation of transaction prices over time by plotting individual transactions and overlaying polynomial regression lines to show the general trend.",
+    "original_question": "Which year recorded the most consumption of gas paid in CZK?",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "visualization_ambiguity",
+        "error_correction"
+      ],
+      "template_names": [
+        "chart_type_missing",
+        "data_range_mismatch"
+      ],
+      "target_feature_paths": [
+        "transform.filter",
+        "mark.type"
+      ],
+      "preferred_interface": "ask_user_vis",
+      "difficulty": "medium",
+      "corruption": null
+    },
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Data retrieval\n# Retrieve Date, Time, and Price.\n# We use ORDER BY RANDOM() to get a representative random sample of transactions \n# rather than a sequential chunk, and LIMIT 80 to ensure the dataset size is \n# optimal for visualization.\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\nSQL = \"SELECT Date, Time, Price FROM transactions_1k ORDER BY RANDOM() LIMIT 80\"\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Combine 'Date' and 'Time' to create a precise timestamp for the X-axis\ndf['Date'] = pd.to_datetime(df['Date'].astype(str) + ' ' + df['Time'].astype(str))\n\n# Filter to relevant columns and sort chronologically\ndf = df[['Date', 'Price']].sort_values('Date')\n\n# Stage 3: Visualization\n# Define the degree of the polynomial fits to overlay\ndegree_list = [1, 3, 5]\n\n# Base chart: Scatter plot of individual transaction prices\nbase = alt.Chart(df).mark_circle(color=\"black\", opacity=0.5).encode(\n    alt.X(\"Date:T\", title=\"Date\"),\n    alt.Y(\"Price:Q\", title=\"Transaction Price\")\n)\n\n# Layer: Generate polynomial regression lines for each degree in the list\npolynomial_fit = [\n    base.transform_regression(\n        \"Date\", \"Price\", method=\"poly\", order=order, as_=[\"Date\", str(order)]\n    )\n    .mark_line()\n    .transform_fold([str(order)], as_=[\"Degree\", \"Price\"])\n    .encode(alt.Color(\"Degree:N\", title=\"Polynomial Degree\"))\n    for order in degree_list\n]\n\n# Combine the base scatter plot with the regression lines\nchart = alt.layer(base, *polynomial_fit).properties(\n    title=\"Transaction Price Fluctuations with Polynomial Trend Lines\",\n    width=600,\n    height=400\n)\n\nchart",
+    "vega_lite_spec": {
+      "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json",
+      "config": {
+        "view": {
+          "continuousHeight": 300,
+          "continuousWidth": 300
+        }
+      },
+      "data": {
+        "name": "data-6d7cb052c7bdcb8ebcf975e693dc271d"
+      },
+      "datasets": {
+        "data-6d7cb052c7bdcb8ebcf975e693dc271d": [
+          {
+            "Date": "2012-08-23T09:50:00",
+            "Price": 474.73
+          },
+          {
+            "Date": "2012-08-23T22:59:00",
+            "Price": 718.32
+          },
+          {
+            "Date": "2012-08-24T04:57:00",
+            "Price": 109.1
+          },
+          {
+            "Date": "2012-08-24T05:10:00",
+            "Price": 624.38
+          },
+          {
+            "Date": "2012-08-24T05:40:00",
+            "Price": 426.85
+          }
+        ]
+      },
+      "height": 400,
+      "layer": [
+        {
+          "encoding": {
+            "x": {
+              "field": "Date",
+              "title": "Date",
+              "type": "temporal"
+            },
+            "y": {
+              "field": "Price",
+              "title": "Transaction Price",
+              "type": "quantitative"
+            }
+          },
+          "mark": {
+            "color": "black",
+            "opacity": 0.5,
+            "type": "circle"
+          }
+        },
+        {
+          "encoding": {
+            "color": {
+              "field": "Degree",
+              "title": "Polynomial Degree",
+              "type": "nominal"
+            },
+            "x": {
+              "field": "Date",
+              "title": "Date",
+              "type": "temporal"
+            },
+            "y": {
+              "field": "Price",
+              "title": "Transaction Price",
+              "type": "quantitative"
+            }
+          },
+          "mark": {
+            "type": "line"
+          },
+          "transform": [
+            {
+              "as": [
+                "Date",
+                "1"
+              ],
+              "method": "poly",
+              "on": "Date",
+              "order": 1,
+              "regression": "Price"
+            },
+            {
+              "as": [
+                "Degree",
+                "Price"
+              ],
+              "fold": [
+                "1"
+              ]
+            }
+          ]
+        },
+        {
+          "encoding": {
+            "color": {
+              "field": "Degree",
+              "title": "Polynomial Degree",
+              "type": "nominal"
+            },
+            "x": {
+              "field": "Date",
+              "title": "Date",
+              "type": "temporal"
+            },
+            "y": {
+              "field": "Price",
+              "title": "Transaction Price",
+              "type": "quantitative"
+            }
+          },
+          "mark": {
+            "type": "line"
+          },
+          "transform": [
+            {
+              "as": [
+                "Date",
+                "3"
+              ],
+              "method": "poly",
+              "on": "Date",
+              "order": 3,
+              "regression": "Price"
+            },
+            {
+              "as": [
+                "Degree",
+                "Price"
+              ],
+              "fold": [
+                "3"
+              ]
+            }
+          ]
+        },
+        {
+          "encoding": {
+            "color": {
+              "field": "Degree",
+              "title": "Polynomial Degree",
+              "type": "nominal"
+            },
+            "x": {
+              "field": "Date",
+              "title": "Date",
+              "type": "temporal"
+            },
+            "y": {
+              "field": "Price",
+              "title": "Transaction Price",
+              "type": "quantitative"
+            }
+          },
+          "mark": {
+            "type": "line"
+          },
+          "transform": [
+            {
+              "as": [
+                "Date",
+                "5"
+              ],
+              "method": "poly",
+              "on": "Date",
+              "order": 5,
+              "regression": "Price"
+            },
+            {
+              "as": [
+                "Degree",
+                "Price"
+              ],
+              "fold": [
+                "5"
+              ]
+            }
+          ]
+        }
+      ],
+      "title": "Transaction Price Fluctuations with Polynomial Trend Lines",
+      "width": 600
+    },
+    "image_path": null,
+    "features": [
+      {
+        "path": "layer",
+        "op": "exists",
+        "value": null
+      },
+      {
+        "path": "layer",
+        "op": "len_ge",
+        "value": 4
+      }
+    ],
+    "required_key_features": [
+      {
+        "id": "kf_mark_scatter",
+        "type": "mark",
+        "text": "Display the raw data as a scatter plot showing individual transaction prices over time.",
+        "args": {
+          "mark": "point",
+          "encoding": {
+            "x": "Date",
+            "y": "Price"
+          }
+        },
+        "must": true
+      },
+      {
+        "id": "kf_stat_poly_trends",
+        "type": "overlay_stat_line",
+        "text": "Overlay multiple polynomial trend lines (degrees 1, 3, and 5) to model the price direction.",
+        "args": {
+          "transform": "regression",
+          "method": "poly"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_color_degree",
+        "type": "encoding",
+        "text": "Color-code the trend lines based on their polynomial degree to distinguish them.",
+        "args": {
+          "channel": "color",
+          "field": "Degree"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_axes_titles",
+        "type": "encoding",
+        "text": "Label the axes clearly as 'Date' and 'Transaction Price'.",
+        "args": {
+          "channel": "axis",
+          "properties": [
+            "title"
+          ]
+        },
+        "must": false
+      }
+    ],
+    "chart_type": "polynomial_fit_plot_with_regression_transform",
+    "chart_category": "Uncertainties And Trends",
+    "vis_intent_type": "trend",
+    "db_id": "debit_card_specializing",
+    "difficulty": "moderate",
+    "validation_passed": true,
+    "data_quality_report": {
+      "suitable": true,
+      "score": 1.0,
+      "issues": [],
+      "suggestions": []
+    },
+    "vlm_validation_report": {
+      "readable": true,
+      "readability_score": 1.0,
+      "chart_type_correct": true,
+      "data_represented_correctly": true,
+      "elements_complete": true,
+      "visual_quality_ok": true,
+      "answers_question": true,
+      "issues": [],
+      "suggestions": []
+    },
+    "chart_image_path": "D:\\Machine_Learning\\Deep_Learning\\Project\\Vis-Interact\\dataset_construct\\output\\temp_images\\q1479_c2.png"
+  }
+]

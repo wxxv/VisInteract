@@ -1,0 +1,1 @@
+Please place all `.sqlite` database files from mini-dev into this folder.

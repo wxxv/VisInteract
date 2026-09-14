@@ -1,0 +1,301 @@
+{
+  "timestamp": "2026-01-12T11:35:42.970830",
+  "summary": {
+    "total_samples": 6
+  },
+  "diversity": {
+    "total_samples": 6,
+    "overall_diversity_score": 0.6693566980738004,
+    "dimension_scores": {
+      "encoding_patterns": 0.7219280948873623,
+      "aggregations": 0.8154648767857288,
+      "time_units": 0.8154648767857288,
+      "transforms": 0.8450980400142569,
+      "compositions": 0.7627069065377662,
+      "interactions": 0.72483409150576,
+      "domains": 0.0,
+      "chart_types": 0.9035923614716892,
+      "chart_categories": 0.7896900821428475
+    },
+    "feature_space": {
+      "encoding_patterns": {
+        "T-Q-N": 4,
+        "Q-Q": 1
+      },
+      "aggregations": {
+        "sum": 1,
+        "avg": 1,
+        "count": 1,
+        "max": 0,
+        "min": 0,
+        "median": 0,
+        "distinct": 1,
+        "variance": 1,
+        "stdev": 1
+      },
+      "time_units": {
+        "year": 1,
+        "quarter": 1,
+        "month": 1,
+        "week": 0,
+        "day": 0,
+        "hour": 0,
+        "minute": 1,
+        "yearmonth": 1,
+        "monthdate": 1
+      },
+      "transforms": {
+        "aggregate": 1,
+        "window": 1,
+        "bin": 1,
+        "calculate": 0,
+        "filter": 0,
+        "fold": 0,
+        "pivot": 1,
+        "density": 1,
+        "loess": 1,
+        "regression": 1
+      },
+      "compositions": {
+        "single": 6,
+        "layer": 1,
+        "hconcat": 1,
+        "vconcat": 1,
+        "facet": 1
+      },
+      "interactions": {
+        "none": 5,
+        "brush": 1,
+        "slider": 1
+      },
+      "domains": {
+        "other": 6
+      },
+      "chart_types": {
+        "calculate_residuals": 1,
+        "comet_chart": 1,
+        "gantt_chart": 1,
+        "layered_chart_with_dual-axis": 0,
+        "ranged_dot_plot": 0,
+        "sorted_error_bars_showing_confidence_interval": 1,
+        "top_k_items": 1,
+        "top_k_letters": 1,
+        "waterfall_chart": 1,
+        "wilkinson_dot_plot": 1,
+        "area_chart_with_gradient": 1,
+        "faceted_area_chart": 2,
+        "horizon_graph": 1,
+        "layered_area_chart": 1,
+        "normalized_stacked_area_chart": 4,
+        "bar_and_tick_chart": 0,
+        "bar_chart_highlighting_values_beyond_a_threshold": 0,
+        "bar_chart_with_highlighted_bar": 0,
+        "bar_chart_with_highlighted_segment": 0,
+        "bar_chart_with_labels": 0,
+        "bar_chart_with_labels_based_on_measured_luminance": 0,
+        "bar_chart_with_line_at_mean": 0,
+        "bar_chart_with_line_on_dual_axis": 0,
+        "bar_chart_with_negative_values": 0,
+        "bar_chart_with_range": 0,
+        "bar_chart_with_rolling_mean": 0,
+        "bar_chart_with_rounded_edges": 0,
+        "calculating_percentage_of_total": 0,
+        "compact_faceted_grid_of_bar_charts": 0,
+        "diverging_stacked_bar_chart": 0,
+        "faceted_stacked_bar_chart": 0,
+        "grouped_bar_chart": 0,
+        "grouped_bar_chart_with_error_bars": 0,
+        "grouped_bar_chart_with_xoffset": 0,
+        "grouped_bar_chart_with_xoffset_and_overlapping_bars": 0,
+        "horizontal_bar_chart": 0,
+        "horizontal_grouped_bar_chart": 0,
+        "horizontal_stacked_bar_chart": 0,
+        "layered_bar_chart": 0,
+        "normalized_stacked_bar_chart": 0,
+        "sorted_bar_chart": 0,
+        "stacked_bar_chart": 0,
+        "stacked_bar_chart_with_sorted_segments": 0,
+        "stacked_bar_chart_with_text_overlay": 0,
+        "donut_chart": 0,
+        "pacman_chart": 0,
+        "pie_chart": 0,
+        "pie_chart_with_labels": 0,
+        "polar_bar_chart": 0,
+        "radial_chart": 0,
+        "2d_histogram_heatmap": 0,
+        "2d_histogram_scatter_plot": 0,
+        "boxplot_with_minmax_whiskers": 0,
+        "cumulative_count_chart": 0,
+        "distributions_and_medians_of_likert_scale_ratings": 0,
+        "dot_dash_plot": 0,
+        "empirical_cumulative_distribution_function": 0,
+        "faceted_histogram": 0,
+        "heat_lane_chart": 0,
+        "histogram_with_a_global_mean_overlay": 0,
+        "histogram_with_gradient_color": 0,
+        "histogram_with_responsive_bins": 0,
+        "quantile-quantile_plot": 0,
+        "repeated_density_estimates": 0,
+        "ridgeline_plot": 0,
+        "scatter_plot_with_faceted_marginal_histograms": 0,
+        "stacked_density_estimates": 0,
+        "table_bubble_plot_github_punch_card": 0,
+        "violin_plot": 0,
+        "bar_chart_with_highlighting_on_hover_and_selection_on_click": 0,
+        "interactive_average": 0,
+        "interactive_chart_with_aggregation": 0,
+        "interactive_chart_with_cross-highlight": 0,
+        "interactive_crossfilter": 0,
+        "interactive_legend": 0,
+        "interactive_rectangular_brush": 0,
+        "interactive_scatter_plot_and_linked_layered_histogram": 0,
+        "interactive_selection_of_columns": 0,
+        "interval_selection_with_initial_date_range": 0,
+        "multi-line_highlight": 0,
+        "multi-line_tooltip": 0,
+        "multi-line_tooltip_(standard)": 0,
+        "multi-panel_scatter_plot_with_linked_brushing": 0,
+        "multiple_interactions": 0,
+        "reorder_stacked_bar_segments": 0,
+        "scatter_plot_and_histogram_with_interval_selection": 0,
+        "selection_detail": 0,
+        "selection_histogram": 0,
+        "simple_interactive_colored_scatter_plot": 0,
+        "slider_cutoff": 0,
+        "using_selection_interval_with_mark_area": 0,
+        "bump_chart": 0,
+        "filled_step_chart": 0,
+        "line_chart_with_arrows": 0,
+        "line_chart_with_cumulative_sum": 0,
+        "line_chart_with_custom_legend": 0,
+        "line_chart_with_custom_order": 0,
+        "line_chart_with_datum": 0,
+        "line_chart_with_datum_for_color": 0,
+        "line_chart_with_last_value_labeled": 0,
+        "line_chart_with_layered_aggregates": 0,
+        "line_chart_with_logarithmic_scale": 0,
+        "line_chart_with_percent_axis": 0,
+        "line_chart_with_point_markers": 0,
+        "line_chart_with_sequence_generator": 0,
+        "line_chart_with_stroked_point_markers": 0,
+        "line_chart_with_varying_size": 0,
+        "multiple_series_line_chart": 0,
+        "step_chart": 0,
+        "brushing_scatter_plot_to_show_data_on_a_table": 0,
+        "bubble_plot": 0,
+        "faceted_scatter_plot": 1,
+        "multifeature_scatter_plot": 0,
+        "scatter_matrix": 0,
+        "scatter_plot_with_href": 0,
+        "scatter_plot_with_shaded_area": 0,
+        "simple_scatter_plot_with_labels": 0,
+        "simple_bar_chart": 0,
+        "simple_heatmap": 0,
+        "simple_histogram": 0,
+        "simple_line_chart": 0,
+        "simple_scatter_plot_with_tooltips": 0,
+        "simple_stacked_area_chart": 0,
+        "simple_strip_plot": 0,
+        "annual_weather_heatmap": 0,
+        "lasagna_plot_dense_time-series_heatmap": 0,
+        "text_over_a_heatmap": 0,
+        "error_bars_with_confidence_interval": 0,
+        "error_bars_with_standard_deviation": 0,
+        "line_chart_with_confidence_interval_band": 0,
+        "polynomial_fit_plot_with_regression_transform": 0,
+        "scatter_plot_with_loess_lines": 0,
+        "simple_scatter_plot_with_errorbars": 0
+      },
+      "chart_categories": {
+        "Area Charts": 4,
+        "Scatter Plots": 1,
+        "Advanced Calculations": 1
+      },
+      "ambiguity_types": {
+        "error_correction": 4,
+        "visualization_ambiguity": 4,
+        "data_ambiguity": 2
+      },
+      "ambiguity_templates": {
+        "field_name_error": 1,
+        "encoding_channel_missing": 2,
+        "chart_type_missing": 2,
+        "axis_assignment_missing": 1,
+        "vis_data_incompatible": 1,
+        "time_granularity_missing": 2,
+        "data_range_mismatch": 2
+      }
+    },
+    "underrepresented": {
+      "aggregations": [
+        "max",
+        "min",
+        "median"
+      ],
+      "time_units": [
+        "week",
+        "day",
+        "hour"
+      ],
+      "transforms": [
+        "calculate",
+        "filter",
+        "fold"
+      ],
+      "compositions": [
+        "repeat"
+      ]
+    },
+    "chart_type_stats": {
+      "total_chart_types_available": 133,
+      "total_chart_types_used": 16,
+      "total_categories_used": 3,
+      "top_chart_types": {
+        "normalized_stacked_area_chart": 4,
+        "faceted_area_chart": 2,
+        "calculate_residuals": 1,
+        "comet_chart": 1,
+        "gantt_chart": 1,
+        "sorted_error_bars_showing_confidence_interval": 1,
+        "top_k_items": 1,
+        "top_k_letters": 1,
+        "waterfall_chart": 1,
+        "wilkinson_dot_plot": 1
+      },
+      "overrepresented": [
+        "normalized_stacked_area_chart"
+      ]
+    },
+    "ambiguity_stats": {
+      "types_distribution": {
+        "error_correction": 4,
+        "visualization_ambiguity": 4,
+        "data_ambiguity": 2
+      },
+      "templates_distribution": {
+        "field_name_error": 1,
+        "encoding_channel_missing": 2,
+        "chart_type_missing": 2,
+        "axis_assignment_missing": 1,
+        "vis_data_incompatible": 1,
+        "time_granularity_missing": 2,
+        "data_range_mismatch": 2
+      },
+      "underrepresented_types": [
+        "DATA",
+        "VISUALIZATION",
+        "INFO_COMPLETION",
+        "ERROR_CORRECTION"
+      ],
+      "underrepresented_templates": [
+        "aggregation_missing",
+        "topk_missing",
+        "filter_scope_missing",
+        "bucket_definition_needed",
+        "grouping_dimension_missing",
+        "comparison_baseline_missing",
+        "aggregation_conflict"
+      ]
+    }
+  }
+}

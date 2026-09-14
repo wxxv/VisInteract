@@ -1,0 +1,4059 @@
+{
+  "timestamp": "2025-12-19T07:41:38.428225",
+  "summary": {
+    "instances_processed": 415,
+    "candidates_attempted": 1213,
+    "candidates_succeeded": 1063,
+    "success_rate": "87.6%",
+    "total_samples": 1063
+  },
+  "distribution": {
+    "chart_types": {
+      "pie_chart": 12,
+      "table_bubble_plot_github_punch_card": 12,
+      "grouped_bar_chart_with_error_bars": 9,
+      "simple_bar_chart": 7,
+      "interactive_legend": 5,
+      "slider_cutoff": 7,
+      "stacked_bar_chart_with_text_overlay": 11,
+      "multiple_interactions": 4,
+      "interactive_chart_with_cross-highlight": 9,
+      "quantile-quantile_plot": 4,
+      "simple_heatmap": 13,
+      "multi-line_tooltip": 4,
+      "line_chart_with_datum": 9,
+      "bar_chart_with_rolling_mean": 5,
+      "using_selection_interval_with_mark_area": 4,
+      "text_over_a_heatmap": 30,
+      "bar_chart_with_highlighted_segment": 7,
+      "line_chart_with_last_value_labeled": 9,
+      "calculate_residuals": 5,
+      "histogram_with_gradient_color": 10,
+      "multifeature_scatter_plot": 15,
+      "histogram_with_responsive_bins": 4,
+      "simple_strip_plot": 9,
+      "line_chart_with_layered_aggregates": 4,
+      "histogram_with_a_global_mean_overlay": 7,
+      "simple_scatter_plot_with_tooltips": 10,
+      "heat_lane_chart": 4,
+      "line_chart_with_stroked_point_markers": 10,
+      "interval_selection_with_initial_date_range": 5,
+      "line_chart_with_arrows": 4,
+      "bubble_plot": 19,
+      "sorted_bar_chart": 13,
+      "bar_chart_highlighting_values_beyond_a_threshold": 9,
+      "faceted_histogram": 11,
+      "top_k_items": 18,
+      "polynomial_fit_plot_with_regression_transform": 6,
+      "bar_chart_with_highlighting_on_hover_and_selection_on_click": 6,
+      "multiple_series_line_chart": 11,
+      "annual_weather_heatmap": 9,
+      "grouped_bar_chart": 11,
+      "scatter_plot_with_href": 8,
+      "stacked_density_estimates": 9,
+      "line_chart_with_logarithmic_scale": 5,
+      "ranged_dot_plot": 7,
+      "wilkinson_dot_plot": 4,
+      "simple_scatter_plot_with_errorbars": 5,
+      "simple_interactive_colored_scatter_plot": 11,
+      "normalized_stacked_area_chart": 17,
+      "area_chart_with_gradient": 10,
+      "faceted_area_chart": 8,
+      "interactive_average": 4,
+      "layered_chart_with_dual-axis": 4,
+      "scatter_plot_with_shaded_area": 5,
+      "line_chart_with_datum_for_color": 4,
+      "line_chart_with_confidence_interval_band": 10,
+      "empirical_cumulative_distribution_function": 5,
+      "simple_scatter_plot_with_labels": 6,
+      "line_chart_with_sequence_generator": 4,
+      "normalized_stacked_bar_chart": 16,
+      "ridgeline_plot": 7,
+      "line_chart_with_custom_legend": 11,
+      "bar_chart_with_rounded_edges": 6,
+      "diverging_stacked_bar_chart": 4,
+      "bar_chart_with_line_on_dual_axis": 4,
+      "distributions_and_medians_of_likert_scale_ratings": 4,
+      "violin_plot": 17,
+      "2d_histogram_heatmap": 7,
+      "bar_chart_with_labels_based_on_measured_luminance": 8,
+      "selection_histogram": 4,
+      "scatter_plot_with_loess_lines": 5,
+      "multi-line_highlight": 7,
+      "repeated_density_estimates": 14,
+      "lasagna_plot_dense_time-series_heatmap": 9,
+      "horizontal_bar_chart": 13,
+      "step_chart": 8,
+      "faceted_scatter_plot": 16,
+      "compact_faceted_grid_of_bar_charts": 7,
+      "interactive_selection_of_columns": 4,
+      "line_chart_with_point_markers": 7,
+      "radial_chart": 12,
+      "error_bars_with_confidence_interval": 12,
+      "bar_chart_with_labels": 10,
+      "multi-panel_scatter_plot_with_linked_brushing": 5,
+      "stacked_bar_chart": 10,
+      "bar_chart_with_negative_values": 3,
+      "bar_chart_with_line_at_mean": 12,
+      "boxplot_with_minmax_whiskers": 17,
+      "filled_step_chart": 4,
+      "sorted_error_bars_showing_confidence_interval": 8,
+      "interactive_crossfilter": 3,
+      "multi-line_tooltip_(standard)": 9,
+      "interactive_scatter_plot_and_linked_layered_histogram": 8,
+      "grouped_bar_chart_with_xoffset_and_overlapping_bars": 7,
+      "scatter_plot_and_histogram_with_interval_selection": 7,
+      "dot_dash_plot": 7,
+      "donut_chart": 15,
+      "layered_area_chart": 8,
+      "polar_bar_chart": 3,
+      "line_chart_with_cumulative_sum": 10,
+      "calculating_percentage_of_total": 8,
+      "2d_histogram_scatter_plot": 9,
+      "bar_chart_with_range": 10,
+      "stacked_bar_chart_with_sorted_segments": 13,
+      "simple_stacked_area_chart": 10,
+      "bar_chart_with_highlighted_bar": 7,
+      "line_chart_with_varying_size": 3,
+      "top_k_letters": 13,
+      "interactive_rectangular_brush": 6,
+      "error_bars_with_standard_deviation": 13,
+      "horizon_graph": 6,
+      "selection_detail": 5,
+      "bump_chart": 5,
+      "bar_and_tick_chart": 8,
+      "line_chart_with_custom_order": 3,
+      "horizontal_stacked_bar_chart": 15,
+      "comet_chart": 4,
+      "simple_line_chart": 4,
+      "scatter_matrix": 6,
+      "faceted_stacked_bar_chart": 8,
+      "layered_bar_chart": 5,
+      "brushing_scatter_plot_to_show_data_on_a_table": 3,
+      "cumulative_count_chart": 12,
+      "pacman_chart": 3,
+      "gantt_chart": 3,
+      "line_chart_with_percent_axis": 3,
+      "waterfall_chart": 3,
+      "grouped_bar_chart_with_xoffset": 15,
+      "interactive_chart_with_aggregation": 3,
+      "reorder_stacked_bar_segments": 5,
+      "scatter_plot_with_faceted_marginal_histograms": 5,
+      "pie_chart_with_labels": 4,
+      "horizontal_grouped_bar_chart": 3,
+      "simple_histogram": 5
+    },
+    "intent_types": {
+      "composition": 147,
+      "distribution": 211,
+      "comparison": 217,
+      "trend": 201,
+      "correlation": 183,
+      "ranking": 104
+    },
+    "databases": {
+      "student_club": 3,
+      "thrombosis_prediction": 74,
+      "european_football_2": 139,
+      "formula_1": 171,
+      "superhero": 134,
+      "codebase_community": 126,
+      "card_games": 144,
+      "toxicology": 100,
+      "california_schools": 81,
+      "financial": 91
+    },
+    "difficulties": {
+      "moderate": 552,
+      "challenging": 222,
+      "simple": 289
+    }
+  },
+  "diversity": {
+    "total_samples": 1346,
+    "overall_diversity_score": 0.5473301072249379,
+    "dimension_scores": {
+      "encoding_patterns": 0.7899919490607206,
+      "aggregations": 0.4194264650669049,
+      "time_units": 0.6712094006886253,
+      "transforms": 0.684011282651567,
+      "compositions": 0.5878603966387085,
+      "interactions": 0.678811256468039,
+      "domains": 0.0,
+      "chart_types": 0.9784848795785419,
+      "chart_categories": 0.9247698397494015
+    },
+    "feature_space": {
+      "encoding_patterns": {
+        "Q-Q": 62,
+        "T-Q-N": 85,
+        "N-Q-Q": 22,
+        "Q-N-N": 96,
+        "Q-N": 29,
+        "N-O-N": 1,
+        "N-Q": 28,
+        "Q-Q-N-Q": 30,
+        "Q-Q-N": 105,
+        "N-Q-N": 74,
+        "Q-O-N": 5,
+        "Q-Q-Q": 22,
+        "O-Q-N": 12,
+        "O-N-Q": 15,
+        "T-Q": 54,
+        "N": 36,
+        "T-Q-Q": 5,
+        "Q-N-Q": 35,
+        "O-N-Q-Q": 6,
+        "T-N-Q-Q": 1,
+        "N-N-Q": 12,
+        "N-O-Q": 1,
+        "O-O-Q": 11,
+        "O-O-N": 6,
+        "T-N": 2,
+        "Q-Q-Q-Q": 18,
+        "T-O-N": 1,
+        "T-Q-N-Q": 2,
+        "N-N-Q-Q": 8,
+        "O-O": 1,
+        "O-O-Q-Q": 2,
+        "O-Q": 6,
+        "Q-N-Q-Q": 1,
+        "N-O": 1,
+        "N-N-N-Q": 2,
+        "T-N-Q": 1,
+        "Q-O": 1,
+        "Q-N-O": 1,
+        "T": 1,
+        "T-N-N": 1
+      },
+      "aggregations": {
+        "sum": 72,
+        "count": 86,
+        "mean": 7,
+        "distinct": 2,
+        "avg": 0,
+        "max": 0,
+        "min": 1,
+        "median": 0,
+        "variance": 0
+      },
+      "time_units": {
+        "yearmonth": 13,
+        "month": 7,
+        "yearmonthdate": 4,
+        "yearquarter": 1,
+        "year": 9,
+        "quarter": 0,
+        "week": 0,
+        "day": 1,
+        "hour": 0,
+        "minute": 0,
+        "monthdate": 0,
+        "date": 4
+      },
+      "transforms": {
+        "density": 45,
+        "window": 102,
+        "filter": 48,
+        "calculate": 74,
+        "fold": 4,
+        "bin": 16,
+        "aggregate": 4,
+        "pivot": 0,
+        "loess": 0,
+        "regression": 0
+      },
+      "compositions": {
+        "single": 799,
+        "layer": 401,
+        "vconcat": 42,
+        "facet": 32,
+        "hconcat": 55,
+        "repeat": 17
+      },
+      "interactions": {
+        "none": 996,
+        "brush": 265,
+        "slider": 222,
+        "point_selection": 106,
+        "legend": 16
+      },
+      "domains": {
+        "other": 1346
+      },
+      "chart_types": {
+        "calculate_residuals": 6,
+        "comet_chart": 6,
+        "gantt_chart": 5,
+        "layered_chart_with_dual-axis": 5,
+        "ranged_dot_plot": 10,
+        "sorted_error_bars_showing_confidence_interval": 10,
+        "top_k_items": 20,
+        "top_k_letters": 17,
+        "waterfall_chart": 5,
+        "wilkinson_dot_plot": 5,
+        "area_chart_with_gradient": 12,
+        "faceted_area_chart": 14,
+        "horizon_graph": 8,
+        "layered_area_chart": 11,
+        "normalized_stacked_area_chart": 18,
+        "bar_and_tick_chart": 10,
+        "bar_chart_highlighting_values_beyond_a_threshold": 12,
+        "bar_chart_with_highlighted_bar": 10,
+        "bar_chart_with_highlighted_segment": 9,
+        "bar_chart_with_labels": 12,
+        "bar_chart_with_labels_based_on_measured_luminance": 11,
+        "bar_chart_with_line_at_mean": 14,
+        "bar_chart_with_line_on_dual_axis": 5,
+        "bar_chart_with_negative_values": 6,
+        "bar_chart_with_range": 12,
+        "bar_chart_with_rolling_mean": 7,
+        "bar_chart_with_rounded_edges": 8,
+        "calculating_percentage_of_total": 12,
+        "compact_faceted_grid_of_bar_charts": 10,
+        "diverging_stacked_bar_chart": 5,
+        "faceted_stacked_bar_chart": 10,
+        "grouped_bar_chart": 14,
+        "grouped_bar_chart_with_error_bars": 10,
+        "grouped_bar_chart_with_xoffset": 19,
+        "grouped_bar_chart_with_xoffset_and_overlapping_bars": 9,
+        "horizontal_bar_chart": 17,
+        "horizontal_grouped_bar_chart": 6,
+        "horizontal_stacked_bar_chart": 18,
+        "layered_bar_chart": 7,
+        "normalized_stacked_bar_chart": 20,
+        "sorted_bar_chart": 16,
+        "stacked_bar_chart": 12,
+        "stacked_bar_chart_with_sorted_segments": 18,
+        "stacked_bar_chart_with_text_overlay": 13,
+        "donut_chart": 19,
+        "pacman_chart": 5,
+        "pie_chart": 13,
+        "pie_chart_with_labels": 7,
+        "polar_bar_chart": 5,
+        "radial_chart": 15,
+        "2d_histogram_heatmap": 9,
+        "2d_histogram_scatter_plot": 11,
+        "boxplot_with_minmax_whiskers": 19,
+        "cumulative_count_chart": 14,
+        "distributions_and_medians_of_likert_scale_ratings": 5,
+        "dot_dash_plot": 9,
+        "empirical_cumulative_distribution_function": 6,
+        "faceted_histogram": 13,
+        "heat_lane_chart": 5,
+        "histogram_with_a_global_mean_overlay": 8,
+        "histogram_with_gradient_color": 12,
+        "histogram_with_responsive_bins": 5,
+        "quantile-quantile_plot": 5,
+        "repeated_density_estimates": 16,
+        "ridgeline_plot": 9,
+        "scatter_plot_with_faceted_marginal_histograms": 9,
+        "stacked_density_estimates": 11,
+        "table_bubble_plot_github_punch_card": 13,
+        "violin_plot": 19,
+        "bar_chart_with_highlighting_on_hover_and_selection_on_click": 7,
+        "interactive_average": 5,
+        "interactive_chart_with_aggregation": 5,
+        "interactive_chart_with_cross-highlight": 10,
+        "interactive_crossfilter": 5,
+        "interactive_legend": 6,
+        "interactive_rectangular_brush": 8,
+        "interactive_scatter_plot_and_linked_layered_histogram": 10,
+        "interactive_selection_of_columns": 5,
+        "interval_selection_with_initial_date_range": 6,
+        "multi-line_highlight": 9,
+        "multi-line_tooltip": 5,
+        "multi-line_tooltip_(standard)": 12,
+        "multi-panel_scatter_plot_with_linked_brushing": 7,
+        "multiple_interactions": 5,
+        "reorder_stacked_bar_segments": 8,
+        "scatter_plot_and_histogram_with_interval_selection": 10,
+        "selection_detail": 7,
+        "selection_histogram": 8,
+        "simple_interactive_colored_scatter_plot": 13,
+        "slider_cutoff": 8,
+        "using_selection_interval_with_mark_area": 5,
+        "bump_chart": 7,
+        "filled_step_chart": 6,
+        "line_chart_with_arrows": 5,
+        "line_chart_with_cumulative_sum": 11,
+        "line_chart_with_custom_legend": 12,
+        "line_chart_with_custom_order": 5,
+        "line_chart_with_datum": 10,
+        "line_chart_with_datum_for_color": 5,
+        "line_chart_with_last_value_labeled": 12,
+        "line_chart_with_layered_aggregates": 5,
+        "line_chart_with_logarithmic_scale": 6,
+        "line_chart_with_percent_axis": 5,
+        "line_chart_with_point_markers": 10,
+        "line_chart_with_sequence_generator": 5,
+        "line_chart_with_stroked_point_markers": 11,
+        "line_chart_with_varying_size": 5,
+        "multiple_series_line_chart": 13,
+        "step_chart": 10,
+        "brushing_scatter_plot_to_show_data_on_a_table": 5,
+        "bubble_plot": 20,
+        "faceted_scatter_plot": 19,
+        "multifeature_scatter_plot": 19,
+        "scatter_matrix": 8,
+        "scatter_plot_with_href": 9,
+        "scatter_plot_with_shaded_area": 6,
+        "simple_scatter_plot_with_labels": 7,
+        "simple_bar_chart": 9,
+        "simple_heatmap": 15,
+        "simple_histogram": 8,
+        "simple_line_chart": 6,
+        "simple_scatter_plot_with_tooltips": 13,
+        "simple_stacked_area_chart": 12,
+        "simple_strip_plot": 10,
+        "annual_weather_heatmap": 10,
+        "lasagna_plot_dense_time-series_heatmap": 13,
+        "text_over_a_heatmap": 37,
+        "error_bars_with_confidence_interval": 16,
+        "error_bars_with_standard_deviation": 18,
+        "line_chart_with_confidence_interval_band": 12,
+        "polynomial_fit_plot_with_regression_transform": 7,
+        "scatter_plot_with_loess_lines": 8,
+        "simple_scatter_plot_with_errorbars": 6
+      },
+      "chart_categories": {
+        "Distributions": 196,
+        "Area Charts": 63,
+        "Advanced Calculations": 86,
+        "Tables": 61,
+        "Bar Charts": 335,
+        "Interactive Charts": 163,
+        "Scatter Plots": 95,
+        "Uncertainties And Trends": 65,
+        "Line Charts": 146,
+        "Circular Plots": 64,
+        "Simple Charts": 72
+      },
+      "ambiguity_types": {
+        "visualization_ambiguity": 518,
+        "error_correction": 927,
+        "data_ambiguity": 323,
+        "information_completion": 86
+      },
+      "ambiguity_templates": {
+        "axis_assignment_missing": 66,
+        "chart_type_missing": 76,
+        "data_range_mismatch": 559,
+        "aggregation_conflict": 169,
+        "encoding_channel_missing": 421,
+        "topk_missing": 35,
+        "filter_scope_missing": 22,
+        "aggregation_missing": 179,
+        "visualization_type_missing": 47,
+        "redundant_context": 7,
+        "time_granularity_missing": 139,
+        "interaction_method_missing": 1,
+        "vague_vis": 1,
+        "chart_type_unspecified": 2,
+        "field_name_error": 301,
+        "vis_data_incompatible": 681,
+        "comparison_baseline_missing": 17,
+        "bucket_definition_needed": 43,
+        "grouping_dimension_missing": 26,
+        "visualization_ambiguity": 5,
+        "redundancy_filler": 2,
+        "chart_type_not_specified": 1,
+        "vis_type_missing": 25,
+        "distribution_bins_missing": 1,
+        "visualization_type_ambiguity": 1,
+        "visual_type_missing": 3,
+        "unnecessary_context": 2,
+        "redundant_info": 2,
+        "field_vague": 1,
+        "visualization_vague": 5,
+        "vague_field_references": 1,
+        "filter_value_ambiguity": 2,
+        "info_redundancy": 1,
+        "vague_requirement": 1,
+        "attribute_ambiguity": 2,
+        "vague_filter_criteria": 1,
+        "value_threshold_vague": 1,
+        "bin_size_missing": 2,
+        "vague_concept": 2,
+        "binning_missing": 1,
+        "value_unspecified": 1,
+        "grouping_logic_missing": 1,
+        "vague_filter": 2,
+        "value_ambiguity": 1,
+        "unspecified_detail": 1,
+        "visual_encoding_missing": 1,
+        "vague_relationship": 2,
+        "info_completion": 8,
+        "info_completion_missing": 2,
+        "vague_metric": 2,
+        "visualization_missing": 3,
+        "info_incomplete": 1,
+        "data_scope_ambiguity": 1,
+        "attribute_missing": 1,
+        "top_n_missing": 1,
+        "metric_vagueness": 1,
+        "context_redundancy": 1,
+        "chart_type_hidden": 2,
+        "categorical_filter_missing": 1,
+        "time_granularity_vague": 1,
+        "filter_missing": 3,
+        "vague_data_range": 1,
+        "comparison_baseline_vague": 1,
+        "comparison_benchmark_missing": 1,
+        "vague_field_selection": 1,
+        "filter_vague": 1,
+        "filtering_missing": 1,
+        "visual_style_vague": 1,
+        "value_definition_missing": 1,
+        "value_reference_missing": 1,
+        "vague_filtering": 1,
+        "threshold_missing": 2,
+        "grouping_undefined": 1,
+        "vague_data_reference": 3,
+        "vague_categorical_grouping": 1,
+        "attribute_mapping_ambiguity": 1,
+        "top_k_missing": 2,
+        "filter_criteria_missing": 1,
+        "baseline_missing": 1,
+        "vague_visual_preference": 1,
+        "vague_filter_conditions": 1,
+        "visual_encoding_ambiguity": 1,
+        "vague_comparison": 1,
+        "info_missing_values": 1,
+        "vague_grouping": 2,
+        "vis_type_ambiguous": 1,
+        "statistical_detail_missing": 1,
+        "filtering_vague": 1,
+        "field_name_misconception": 1
+      }
+    },
+    "underrepresented": {
+      "aggregations": [
+        "avg",
+        "max",
+        "min",
+        "median",
+        "distinct",
+        "variance",
+        "stdev"
+      ],
+      "time_units": [
+        "quarter",
+        "week",
+        "day",
+        "hour",
+        "minute",
+        "monthdate"
+      ],
+      "transforms": [
+        "aggregate",
+        "fold",
+        "pivot",
+        "loess",
+        "regression"
+      ],
+      "compositions": [
+        "hconcat",
+        "vconcat",
+        "facet",
+        "repeat"
+      ]
+    },
+    "chart_type_stats": {
+      "total_chart_types_available": 133,
+      "total_chart_types_used": 133,
+      "total_categories_used": 11,
+      "top_chart_types": {
+        "text_over_a_heatmap": 37,
+        "top_k_items": 20,
+        "normalized_stacked_bar_chart": 20,
+        "bubble_plot": 20,
+        "multifeature_scatter_plot": 19,
+        "grouped_bar_chart_with_xoffset": 19,
+        "donut_chart": 19,
+        "boxplot_with_minmax_whiskers": 19,
+        "violin_plot": 19,
+        "faceted_scatter_plot": 19
+      },
+      "overrepresented": [
+        "text_over_a_heatmap"
+      ]
+    },
+    "ambiguity_stats": {
+      "types_distribution": {
+        "visualization_ambiguity": 518,
+        "error_correction": 927,
+        "data_ambiguity": 323,
+        "information_completion": 86
+      },
+      "templates_distribution": {
+        "axis_assignment_missing": 66,
+        "chart_type_missing": 76,
+        "data_range_mismatch": 559,
+        "aggregation_conflict": 169,
+        "encoding_channel_missing": 421,
+        "topk_missing": 35,
+        "filter_scope_missing": 22,
+        "aggregation_missing": 179,
+        "visualization_type_missing": 47,
+        "redundant_context": 7,
+        "time_granularity_missing": 139,
+        "interaction_method_missing": 1,
+        "vague_vis": 1,
+        "chart_type_unspecified": 2,
+        "field_name_error": 301,
+        "vis_data_incompatible": 681,
+        "comparison_baseline_missing": 17,
+        "bucket_definition_needed": 43,
+        "grouping_dimension_missing": 26,
+        "visualization_ambiguity": 5,
+        "redundancy_filler": 2,
+        "chart_type_not_specified": 1,
+        "vis_type_missing": 25,
+        "distribution_bins_missing": 1,
+        "visualization_type_ambiguity": 1,
+        "visual_type_missing": 3,
+        "unnecessary_context": 2,
+        "redundant_info": 2,
+        "field_vague": 1,
+        "visualization_vague": 5,
+        "vague_field_references": 1,
+        "filter_value_ambiguity": 2,
+        "info_redundancy": 1,
+        "vague_requirement": 1,
+        "attribute_ambiguity": 2,
+        "vague_filter_criteria": 1,
+        "value_threshold_vague": 1,
+        "bin_size_missing": 2,
+        "vague_concept": 2,
+        "binning_missing": 1,
+        "value_unspecified": 1,
+        "grouping_logic_missing": 1,
+        "vague_filter": 2,
+        "value_ambiguity": 1,
+        "unspecified_detail": 1,
+        "visual_encoding_missing": 1,
+        "vague_relationship": 2,
+        "info_completion": 8,
+        "info_completion_missing": 2,
+        "vague_metric": 2,
+        "visualization_missing": 3,
+        "info_incomplete": 1,
+        "data_scope_ambiguity": 1,
+        "attribute_missing": 1,
+        "top_n_missing": 1,
+        "metric_vagueness": 1,
+        "context_redundancy": 1,
+        "chart_type_hidden": 2,
+        "categorical_filter_missing": 1,
+        "time_granularity_vague": 1,
+        "filter_missing": 3,
+        "vague_data_range": 1,
+        "comparison_baseline_vague": 1,
+        "comparison_benchmark_missing": 1,
+        "vague_field_selection": 1,
+        "filter_vague": 1,
+        "filtering_missing": 1,
+        "visual_style_vague": 1,
+        "value_definition_missing": 1,
+        "value_reference_missing": 1,
+        "vague_filtering": 1,
+        "threshold_missing": 2,
+        "grouping_undefined": 1,
+        "vague_data_reference": 3,
+        "vague_categorical_grouping": 1,
+        "attribute_mapping_ambiguity": 1,
+        "top_k_missing": 2,
+        "filter_criteria_missing": 1,
+        "baseline_missing": 1,
+        "vague_visual_preference": 1,
+        "vague_filter_conditions": 1,
+        "visual_encoding_ambiguity": 1,
+        "vague_comparison": 1,
+        "info_missing_values": 1,
+        "vague_grouping": 2,
+        "vis_type_ambiguous": 1,
+        "statistical_detail_missing": 1,
+        "filtering_vague": 1,
+        "field_name_misconception": 1
+      },
+      "underrepresented_types": [
+        "DATA",
+        "VISUALIZATION",
+        "INFO_COMPLETION",
+        "ERROR_CORRECTION"
+      ],
+      "underrepresented_templates": [
+        "topk_missing",
+        "filter_scope_missing",
+        "chart_type_missing",
+        "axis_assignment_missing",
+        "bucket_definition_needed",
+        "grouping_dimension_missing",
+        "comparison_baseline_missing"
+      ]
+    }
+  },
+  "instance_details": [
+    {
+      "question_id": 1435,
+      "db_id": "student_club",
+      "samples_generated": 1,
+      "candidates_attempted": 1,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 1460,
+      "db_id": "student_club",
+      "samples_generated": 1,
+      "candidates_attempted": 1,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 1426,
+      "db_id": "student_club",
+      "samples_generated": 0,
+      "candidates_attempted": 1,
+      "candidates_succeeded": 0,
+      "errors": []
+    },
+    {
+      "question_id": 1404,
+      "db_id": "student_club",
+      "samples_generated": 1,
+      "candidates_attempted": 1,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 1362,
+      "db_id": "student_club",
+      "samples_generated": 0,
+      "candidates_attempted": 1,
+      "candidates_succeeded": 0,
+      "errors": []
+    },
+    {
+      "question_id": 1149,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 1,
+      "candidates_attempted": 1,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 1464,
+      "db_id": "student_club",
+      "samples_generated": 0,
+      "candidates_attempted": 1,
+      "candidates_succeeded": 0,
+      "errors": [
+        "Candidate 3: list index out of range"
+      ]
+    },
+    {
+      "question_id": 1162,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 1,
+      "candidates_attempted": 1,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 1166,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 1,
+      "candidates_attempted": 1,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 1157,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 1,
+      "candidates_attempted": 2,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 1169,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 1,
+      "candidates_attempted": 1,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 1164,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 0,
+      "candidates_attempted": 1,
+      "candidates_succeeded": 0,
+      "errors": []
+    },
+    {
+      "question_id": 1168,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 1,
+      "candidates_attempted": 1,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 1189,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 0,
+      "candidates_attempted": 1,
+      "candidates_succeeded": 0,
+      "errors": []
+    },
+    {
+      "question_id": 1187,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 2,
+      "candidates_attempted": 2,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 1198,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 1,
+      "candidates_attempted": 1,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 1208,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 1,
+      "candidates_attempted": 1,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 1225,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1227,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1220,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 1229,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1209,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 1,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 1231,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 1238,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1235,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1232,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1241,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1242,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 0: list index out of range"
+      ]
+    },
+    {
+      "question_id": 1247,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 1251,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1239,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1243,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1252,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1257,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1255,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1254,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1256,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1267,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 1,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 1265,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1270,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 1275,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 0,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 0,
+      "errors": []
+    },
+    {
+      "question_id": 1281,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 1028,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1302,
+      "db_id": "thrombosis_prediction",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 1025,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1029,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1030,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1032,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1031,
+      "db_id": "european_football_2",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 1035,
+      "db_id": "european_football_2",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 2: list index out of range"
+      ]
+    },
+    {
+      "question_id": 1037,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1036,
+      "db_id": "european_football_2",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 1039,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1040,
+      "db_id": "european_football_2",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 1042,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1057,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1058,
+      "db_id": "european_football_2",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 0: list index out of range"
+      ]
+    },
+    {
+      "question_id": 1048,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1068,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1078,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1076,
+      "db_id": "european_football_2",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 1044,
+      "db_id": "european_football_2",
+      "samples_generated": 1,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 1080,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1079,
+      "db_id": "european_football_2",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 1: list index out of range"
+      ]
+    },
+    {
+      "question_id": 1088,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1091,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1098,
+      "db_id": "european_football_2",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 0: list index out of range"
+      ]
+    },
+    {
+      "question_id": 1092,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1084,
+      "db_id": "european_football_2",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 1094,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1102,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1103,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1110,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1096,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1105,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1113,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1107,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1114,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1116,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1124,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1115,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1122,
+      "db_id": "european_football_2",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 1134,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1130,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1136,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1133,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1135,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1139,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1141,
+      "db_id": "european_football_2",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 1146,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1144,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1145,
+      "db_id": "european_football_2",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 1148,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 846,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1147,
+      "db_id": "european_football_2",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 847,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 850,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 862,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 854,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 859,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 857,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 861,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 865,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 868,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 869,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 866,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 875,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 879,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 872,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 881,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 877,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 880,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 884,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 894,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 892,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 895,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 898,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 901,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 897,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 896,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 902,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 909,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 910,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 904,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 912,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 915,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 906,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 931,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 930,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 928,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 933,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 940,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 944,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 937,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 945,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 948,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 951,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 954,
+      "db_id": "formula_1",
+      "samples_generated": 1,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 950,
+      "db_id": "formula_1",
+      "samples_generated": 1,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 960,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 963,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 959,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 955,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 964,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 2: list index out of range"
+      ]
+    },
+    {
+      "question_id": 971,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 967,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 962,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 972,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 978,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 981,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 977,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 988,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 989,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 990,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 717,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 994,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1003,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1011,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1001,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1002,
+      "db_id": "formula_1",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 723,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 724,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 726,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 719,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 1014,
+      "db_id": "formula_1",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 728,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 1: list index out of range"
+      ]
+    },
+    {
+      "question_id": 730,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 736,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 732,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 738,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 733,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 739,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 737,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 740,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 744,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 1: list index out of range"
+      ]
+    },
+    {
+      "question_id": 750,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 743,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 747,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 745,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 753,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 760,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 751,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 764,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 758,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 761,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 765,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 769,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 766,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 772,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 775,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 779,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 773,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 786,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 782,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 781,
+      "db_id": "superhero",
+      "samples_generated": 1,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 785,
+      "db_id": "superhero",
+      "samples_generated": 1,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 792,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 788,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 791,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 1: list index out of range"
+      ]
+    },
+    {
+      "question_id": 790,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 794,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 798,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 796,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 797,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 0: list index out of range"
+      ]
+    },
+    {
+      "question_id": 801,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 819,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 800,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 806,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 822,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 825,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 0: list index out of range"
+      ]
+    },
+    {
+      "question_id": 824,
+      "db_id": "superhero",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 829,
+      "db_id": "superhero",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 532,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 531,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 537,
+      "db_id": "codebase_community",
+      "samples_generated": 1,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 1,
+      "errors": [
+        "Candidate 1: list index out of range"
+      ]
+    },
+    {
+      "question_id": 547,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 544,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 533,
+      "db_id": "codebase_community",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 539,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 549,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 557,
+      "db_id": "codebase_community",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 563,
+      "db_id": "codebase_community",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 565,
+      "db_id": "codebase_community",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 555,
+      "db_id": "codebase_community",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 571,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 568,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 573,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 567,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 572,
+      "db_id": "codebase_community",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 576,
+      "db_id": "codebase_community",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 584,
+      "db_id": "codebase_community",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 581,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 578,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 592,
+      "db_id": "codebase_community",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 587,
+      "db_id": "codebase_community",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 595,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 586,
+      "db_id": "codebase_community",
+      "samples_generated": 1,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 604,
+      "db_id": "codebase_community",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 633,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 634,
+      "db_id": "codebase_community",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 629,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 598,
+      "db_id": "codebase_community",
+      "samples_generated": 1,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 639,
+      "db_id": "codebase_community",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 0: list index out of range"
+      ]
+    },
+    {
+      "question_id": 637,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 665,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 669,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 640,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 671,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 672,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 683,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 682,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 678,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 685,
+      "db_id": "codebase_community",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 694,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 704,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 687,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 707,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 716,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 710,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 340,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 705,
+      "db_id": "codebase_community",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 344,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 345,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 341,
+      "db_id": "card_games",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 347,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 352,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 349,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 356,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 346,
+      "db_id": "card_games",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 2: list index out of range"
+      ]
+    },
+    {
+      "question_id": 701,
+      "db_id": "codebase_community",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 358,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 366,
+      "db_id": "card_games",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 368,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 371,
+      "db_id": "card_games",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 379,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 377,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 383,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 391,
+      "db_id": "card_games",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 397,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 407,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 408,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 402,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 409,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 405,
+      "db_id": "card_games",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 412,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 415,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 414,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 416,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 440,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 427,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 422,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 424,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 465,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 459,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 462,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 468,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 466,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 469,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 474,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 473,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 479,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 477,
+      "db_id": "card_games",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 472,
+      "db_id": "card_games",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 483,
+      "db_id": "card_games",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 480,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 484,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 486,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 522,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 487,
+      "db_id": "card_games",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 528,
+      "db_id": "card_games",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 529,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 530,
+      "db_id": "card_games",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 518,
+      "db_id": "card_games",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 197,
+      "db_id": "toxicology",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 195,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 198,
+      "db_id": "toxicology",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 206,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 200,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 201,
+      "db_id": "toxicology",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 212,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 208,
+      "db_id": "toxicology",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 207,
+      "db_id": "toxicology",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 213,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 218,
+      "db_id": "toxicology",
+      "samples_generated": 1,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 1,
+      "errors": [
+        "Candidate 2: list index out of range"
+      ]
+    },
+    {
+      "question_id": 215,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 226,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 220,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 219,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 231,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 228,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 227,
+      "db_id": "toxicology",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 230,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 232,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 240,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 234,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 236,
+      "db_id": "toxicology",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 239,
+      "db_id": "toxicology",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 243,
+      "db_id": "toxicology",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 245,
+      "db_id": "toxicology",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 244,
+      "db_id": "toxicology",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 0: list index out of range"
+      ]
+    },
+    {
+      "question_id": 242,
+      "db_id": "toxicology",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 2: list index out of range"
+      ]
+    },
+    {
+      "question_id": 247,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 248,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 255,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 249,
+      "db_id": "toxicology",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 260,
+      "db_id": "toxicology",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 253,
+      "db_id": "toxicology",
+      "samples_generated": 0,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 0,
+      "errors": []
+    },
+    {
+      "question_id": 268,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 263,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 273,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 5,
+      "db_id": "california_schools",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 0: list index out of range"
+      ]
+    },
+    {
+      "question_id": 281,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 327,
+      "db_id": "toxicology",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 282,
+      "db_id": "toxicology",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 12,
+      "db_id": "california_schools",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": [
+        "Candidate 0: list index out of range"
+      ]
+    },
+    {
+      "question_id": 11,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 17,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 23,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 27,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 26,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 24,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 25,
+      "db_id": "california_schools",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 32,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 31,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 37,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 39,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 36,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 40,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 41,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 28,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 45,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 46,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 47,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 62,
+      "db_id": "california_schools",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 48,
+      "db_id": "california_schools",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 50,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 77,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 72,
+      "db_id": "california_schools",
+      "samples_generated": 1,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 1,
+      "errors": []
+    },
+    {
+      "question_id": 79,
+      "db_id": "california_schools",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 85,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 82,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 83,
+      "db_id": "california_schools",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 89,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 92,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 87,
+      "db_id": "california_schools",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 94,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 98,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 95,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 93,
+      "db_id": "financial",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 99,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 115,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 100,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 116,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 125,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 117,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 128,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 112,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 118,
+      "db_id": "financial",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 138,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 136,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 129,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 137,
+      "db_id": "financial",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 137,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 145,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 138,
+      "db_id": "financial",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 152,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 159,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 149,
+      "db_id": "financial",
+      "samples_generated": 2,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 2,
+      "errors": []
+    },
+    {
+      "question_id": 173,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 168,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 169,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 186,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 192,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 189,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    },
+    {
+      "question_id": 194,
+      "db_id": "financial",
+      "samples_generated": 3,
+      "candidates_attempted": 3,
+      "candidates_succeeded": 3,
+      "errors": []
+    }
+  ]
+}

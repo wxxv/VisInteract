@@ -1,0 +1,155 @@
+[
+  {
+    "sample_id": "q5_c0",
+    "db_id": "california_schools",
+    "chart_type": "bar_chart_with_labels",
+    "chart_category": "Bar Charts",
+    "initial_question": "I'm working on the presentation for the board next week and I really want to highlight where the most students are in California. Could you create a nice pie chart for me that ranks the top 15 counties by their total K-12 enrollment? I'm looking for the 2025 numbers specifically because we're focusing on the upcoming year. I just want to get a good feel for the biggest jurisdictions so we know where to focus our resources, so if you could just show me those top 15 in a pie chart for 2025, that would be great.",
+    "ground_truth_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Data retrieval\n# We connect to the database and aggregate the total K-12 enrollment by county.\n# We limit to the top 15 counties to identify the largest educational jurisdictions.\nconn = sqlite3.connect('./databases/california_schools.sqlite')\nSQL = \"\"\"\nSELECT \n    \"County Name\", \n    SUM(\"Enrollment (K-12)\") AS \"Total Enrollment\"\nFROM frpm\nGROUP BY \"County Name\"\nORDER BY \"Total Enrollment\" DESC\nLIMIT 15\n\"\"\"\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Ensure enrollment values are integers for clean label display\ndf['Total Enrollment'] = df['Total Enrollment'].astype(int)\n\n# Stage 3: Visualization\n# Using the bar_chart_with_labels pattern: a base chart with bar and text marks layered.\nbase = alt.Chart(df).encode(\n    x=alt.X('Total Enrollment:Q', title='Total K-12 Student Enrollment'),\n    y=alt.Y('County Name:N', sort='-x', title='County Name'),\n    text='Total Enrollment:Q'\n).properties(\n    title='Top 15 California Counties by K-12 Student Enrollment',\n    width=600,\n    height=400\n)\n\n# Combine the bar chart with text labels for exact counts\nchart = base.mark_bar() + base.mark_text(align='left', dx=3)\n\nchart",
+    "key_features": [
+      {
+        "id": "kf_mark_bar",
+        "type": "mark",
+        "text": "Use a bar chart to display the enrollment data.",
+        "args": {
+          "mark": "bar"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_filter_top_15",
+        "type": "filter",
+        "text": "Focus only on the top 15 counties with the highest enrollment numbers.",
+        "args": {
+          "count": 15
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_sort",
+        "type": "encoding",
+        "text": "Sort the counties from the highest enrollment to the lowest.",
+        "args": {
+          "sort": "descending",
+          "field": "Total Enrollment"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_composition_labels",
+        "type": "composition",
+        "text": "Show the actual enrollment numbers as text labels on the bars for easy reading.",
+        "args": {
+          "layers": [
+            "bar",
+            "text"
+          ]
+        },
+        "must": false
+      }
+    ]
+  },
+  {
+    "sample_id": "q5_c1",
+    "db_id": "california_schools",
+    "chart_type": "error_bars_with_confidence_interval",
+    "chart_category": "Uncertainties And Trends",
+    "initial_question": "So I'm working on this report for the school board and they're really curious about the charter school situation lately. Can you show me how the charter schools are doing on their SAT reading compared to the regular schools? Just like, an overall look at how they compare. And it would be really helpful if we could see if those numbers are pretty solid or if they're kind of all over the place, just so we know how much to trust the comparison. I want to make sure we aren't just looking at one lucky school, you know? My boss mentioned this yesterday and I want to have a clear picture for the Friday meeting.",
+    "ground_truth_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Data retrieval\n# Connect to the California schools database and retrieve SAT reading scores and charter status\nconn = sqlite3.connect('./databases/california_schools.sqlite')\nquery = '''\nSELECT \n    T1.AvgScrRead, \n    T2.Charter\nFROM satscores AS T1\nINNER JOIN schools AS T2 ON T1.cds = T2.CDSCode\nWHERE T1.AvgScrRead > 0 AND T2.Charter IS NOT NULL\n'''\ndf = pd.read_sql_query(query, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert the numeric Charter flag (0/1) to descriptive string labels\ndf['Charter Status'] = df['Charter'].map({1: 'Charter', 0: 'Non-Charter'})\n\n# Calculate the mean score per group to determine the sorting order\n# This ensures the categories are ordered by their mean performance in the visualization\nmean_scores = df.groupby('Charter Status')['AvgScrRead'].mean().sort_values()\ndf['Charter Status'] = pd.Categorical(df['Charter Status'], categories=mean_scores.index, ordered=True)\n\n# Sort the DataFrame based on the categorical order defined above\ndf = df.sort_values('Charter Status')\n\n# Stage 3: Visualization\n# Create error bars representing the 95% confidence interval\nerror_bars = alt.Chart(df).mark_errorbar(extent='ci').encode(\n    alt.X('AvgScrRead:Q')\n        .scale(zero=False)\n        .title('Average SAT Reading Score'),\n    alt.Y('Charter Status:N')\n        .title('School Charter Status')\n)\n\n# Create points representing the mean scores\npoints = alt.Chart(df).mark_point(filled=True, color='black', size=50).encode(\n    x=alt.X('mean(AvgScrRead):Q'),\n    y=alt.Y('Charter Status:N'),\n)\n\n# Layer the error bars and mean points\nchart = (error_bars + points).properties(\n    title={\n        \"text\": \"Average SAT Reading Scores: Charter vs. Non-Charter Schools\",\n        \"subtitle\": \"Error bars represent the 95% Confidence Interval\"\n    },\n    width=500,\n    height=200\n).configure_axis(\n    labelFontSize=12,\n    titleFontSize=14\n)\n\nchart",
+    "key_features": [
+      {
+        "id": "kf_mark_errorbar",
+        "type": "mark",
+        "text": "Use error bars to show the range and uncertainty (confidence interval) of the reading scores.",
+        "args": {
+          "mark": "errorbar"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_agg_mean",
+        "type": "aggregation",
+        "text": "Calculate and display the average SAT Reading score for each group.",
+        "args": {
+          "aggregate": "mean",
+          "field": "AvgScrRead"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_y",
+        "type": "encoding",
+        "text": "Group the results by Charter Status so I can compare Charter schools against Non-Charter schools.",
+        "args": {
+          "field": "Charter Status"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_composition_point",
+        "type": "composition",
+        "text": "Place a distinct marker or dot at the exact average score for each category.",
+        "args": {
+          "mark": "point"
+        },
+        "must": false
+      }
+    ]
+  },
+  {
+    "sample_id": "q11_c0",
+    "db_id": "california_schools",
+    "chart_type": "simple_scatter_plot_with_tooltips",
+    "chart_category": "Simple Charts",
+    "initial_question": "I'm putting together some slides for the board meeting next week and I really want to show if there's any kind of link between the kids on the free or reduced lunch programs and how the schools are performing on their math SATs. I've been hearing a lot of talk about this lately, so I was thinking it would be great to see how those two things go together. Also, is there a way to show the charter schools and the regular ones in that same view? I just want to be able to tell them apart so we can see if the school type actually changes the picture at all. It would be really helpful to have something visual to walk through with the team.",
+    "ground_truth_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect to the database and retrieve merged data from frpm and satscores\n# Using the database path specified in the structure requirements\nconn = sqlite3.connect('./databases/california_schools.sqlite')\n\n# We select columns needed for the correlation analysis and tooltips\n# f: frpm table, s: satscores table\nSQL = \"\"\"\nSELECT \n    f.\"School Name\", \n    f.\"Percent (%) Eligible FRPM (K-12)\" AS Percent_FRPM, \n    f.\"Charter School (Y/N)\" AS Charter_Flag, \n    s.AvgScrMath\nFROM frpm f\nJOIN satscores s ON f.CDSCode = s.cds\nWHERE s.AvgScrMath IS NOT NULL \n  AND f.\"Percent (%) Eligible FRPM (K-12)\" IS NOT NULL\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert the decimal percentage to a 0-100 scale for better visualization readability\ndf['Percent Eligible FRPM'] = df['Percent_FRPM'] * 100\n\n# Convert the Charter School flag (0/1) into descriptive strings for the chart legend\ndf['Charter School'] = df['Charter_Flag'].map({1: 'Charter', 0: 'Non-Charter'})\n\n# Rename columns to match the visualization requirements and for cleaner display in tooltips\ndf = df.rename(columns={\n    'AvgScrMath': 'Average Math Score',\n    'School Name': 'School'\n})\n\n# Select and order the final columns for the visualization\ndf = df[['School', 'Percent Eligible FRPM', 'Charter School', 'Average Math Score']]\n\n# Stage 3: Visualization\n# Using the simple_scatter_plot_with_tooltips pattern from the reference\nchart = alt.Chart(df).mark_circle(size=60).encode(\n    x=alt.X('Percent Eligible FRPM:Q', title='Percent Eligible for FRPM (%)'),\n    y=alt.Y('Average Math Score:Q', title='Average SAT Math Score'),\n    color=alt.Color('Charter School:N', title='School Type'),\n    tooltip=[\n        alt.Tooltip('School:N'),\n        alt.Tooltip('Percent Eligible FRPM:Q', format='.2f'),\n        alt.Tooltip('Average Math Score:Q'),\n        alt.Tooltip('Charter School:N')\n    ]\n).properties(\n    title='Correlation: FRPM Eligibility vs. SAT Math Scores',\n    width=600,\n    height=400\n).interactive()\n\nchart",
+    "key_features": [
+      {
+        "id": "kf_mark_scatter",
+        "type": "mark",
+        "text": "Use a scatter plot to show the relationship between socioeconomic status and test scores.",
+        "args": {
+          "mark": "point"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_axes",
+        "type": "encoding",
+        "text": "Plot the percentage of students eligible for free/reduced price meals against the average SAT math scores.",
+        "args": {
+          "x": "Percent Eligible FRPM",
+          "y": "Average Math Score"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_color",
+        "type": "encoding",
+        "text": "Color-code the points to distinguish between charter and non-charter schools.",
+        "args": {
+          "color": "Charter School"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_interaction_tooltip",
+        "type": "interaction",
+        "text": "Show the school name and specific scores when I hover over the data points.",
+        "args": {
+          "interaction": "tooltip"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_interaction_zoom",
+        "type": "interaction",
+        "text": "Allow me to zoom in and out or pan across the chart to see dense areas more clearly.",
+        "args": {
+          "interaction": "zoom_pan"
+        },
+        "must": false
+      }
+    ]
+  }
+]

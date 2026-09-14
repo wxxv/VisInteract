@@ -1,0 +1,201 @@
+================================================================================
+数据集统计报告
+================================================================================
+
+## 基础统计
+总样本数: 1098
+
+## 按数据库统计
+  formula_1: 136 (12.4%)
+  superhero: 119 (10.8%)
+  european_football_2: 114 (10.4%)
+  thrombosis_prediction: 114 (10.4%)
+  card_games: 109 (9.9%)
+  codebase_community: 107 (9.7%)
+  student_club: 100 (9.1%)
+  toxicology: 88 (8.0%)
+  financial: 75 (6.8%)
+  california_schools: 68 (6.2%)
+  debit_card_specializing: 68 (6.2%)
+
+## 按图表类型统计
+  text_over_a_heatmap: 27 (2.5%)
+  donut_chart: 19 (1.7%)
+  multifeature_scatter_plot: 18 (1.6%)
+  grouped_bar_chart_with_xoffset: 18 (1.6%)
+  normalized_stacked_bar_chart: 18 (1.6%)
+  bubble_plot: 17 (1.5%)
+  top_k_letters: 17 (1.5%)
+  sorted_bar_chart: 16 (1.5%)
+  faceted_scatter_plot: 16 (1.5%)
+  stacked_bar_chart_with_sorted_segments: 16 (1.5%)
+  horizontal_bar_chart: 16 (1.5%)
+  error_bars_with_standard_deviation: 15 (1.4%)
+  error_bars_with_confidence_interval: 14 (1.3%)
+  simple_scatter_plot_with_tooltips: 13 (1.2%)
+  horizontal_stacked_bar_chart: 13 (1.2%)
+  boxplot_with_minmax_whiskers: 13 (1.2%)
+  faceted_area_chart: 13 (1.2%)
+  normalized_stacked_area_chart: 13 (1.2%)
+  radial_chart: 13 (1.2%)
+  bar_chart_with_labels: 12 (1.1%)
+  calculating_percentage_of_total: 12 (1.1%)
+  pie_chart: 12 (1.1%)
+  simple_interactive_colored_scatter_plot: 12 (1.1%)
+  table_bubble_plot_github_punch_card: 12 (1.1%)
+  stacked_bar_chart_with_text_overlay: 12 (1.1%)
+  top_k_items: 12 (1.1%)
+  violin_plot: 12 (1.1%)
+  bar_chart_with_range: 11 (1.0%)
+  line_chart_with_cumulative_sum: 11 (1.0%)
+  cumulative_count_chart: 11 (1.0%)
+  multiple_series_line_chart: 11 (1.0%)
+  area_chart_with_gradient: 11 (1.0%)
+  sorted_error_bars_showing_confidence_interval: 10 (0.9%)
+  line_chart_with_custom_legend: 10 (0.9%)
+  scatter_plot_and_histogram_with_interval_selection: 10 (0.9%)
+  ranged_dot_plot: 10 (0.9%)
+  grouped_bar_chart: 10 (0.9%)
+  step_chart: 10 (0.9%)
+  bar_chart_with_line_at_mean: 10 (0.9%)
+  bar_chart_with_labels_based_on_measured_luminance: 10 (0.9%)
+  repeated_density_estimates: 9 (0.8%)
+  compact_faceted_grid_of_bar_charts: 9 (0.8%)
+  stacked_bar_chart: 9 (0.8%)
+  2d_histogram_scatter_plot: 9 (0.8%)
+  line_chart_with_datum: 9 (0.8%)
+  bar_chart_with_highlighted_bar: 9 (0.8%)
+  lasagna_plot_dense_time-series_heatmap: 9 (0.8%)
+  dot_dash_plot: 9 (0.8%)
+  histogram_with_gradient_color: 9 (0.8%)
+  simple_heatmap: 9 (0.8%)
+  multi-line_tooltip_(standard): 9 (0.8%)
+  slider_cutoff: 8 (0.7%)
+  selection_histogram: 8 (0.7%)
+  reorder_stacked_bar_segments: 8 (0.7%)
+  grouped_bar_chart_with_xoffset_and_overlapping_bars: 8 (0.7%)
+  scatter_matrix: 8 (0.7%)
+  scatter_plot_with_faceted_marginal_histograms: 8 (0.7%)
+  simple_bar_chart: 8 (0.7%)
+  faceted_stacked_bar_chart: 8 (0.7%)
+  scatter_plot_with_href: 8 (0.7%)
+  line_chart_with_confidence_interval_band: 8 (0.7%)
+  annual_weather_heatmap: 8 (0.7%)
+  simple_stacked_area_chart: 8 (0.7%)
+  bar_chart_with_rounded_edges: 8 (0.7%)
+  line_chart_with_last_value_labeled: 8 (0.7%)
+  line_chart_with_stroked_point_markers: 8 (0.7%)
+  bar_chart_highlighting_values_beyond_a_threshold: 8 (0.7%)
+  simple_strip_plot: 7 (0.6%)
+  simple_histogram: 7 (0.6%)
+  interactive_scatter_plot_and_linked_layered_histogram: 7 (0.6%)
+  polynomial_fit_plot_with_regression_transform: 7 (0.6%)
+  bar_chart_with_highlighted_segment: 7 (0.6%)
+  pie_chart_with_labels: 7 (0.6%)
+  line_chart_with_point_markers: 7 (0.6%)
+  multi-line_highlight: 7 (0.6%)
+  layered_area_chart: 7 (0.6%)
+  stacked_density_estimates: 7 (0.6%)
+  interactive_rectangular_brush: 7 (0.6%)
+  faceted_histogram: 7 (0.6%)
+  horizontal_grouped_bar_chart: 6 (0.5%)
+  bump_chart: 6 (0.5%)
+  interactive_legend: 6 (0.5%)
+  simple_scatter_plot_with_labels: 6 (0.5%)
+  ridgeline_plot: 6 (0.5%)
+  line_chart_with_logarithmic_scale: 6 (0.5%)
+  bar_and_tick_chart: 6 (0.5%)
+  simple_line_chart: 6 (0.5%)
+  filled_step_chart: 6 (0.5%)
+  horizon_graph: 6 (0.5%)
+  interval_selection_with_initial_date_range: 6 (0.5%)
+  histogram_with_a_global_mean_overlay: 6 (0.5%)
+  line_chart_with_sequence_generator: 5 (0.5%)
+  scatter_plot_with_loess_lines: 5 (0.5%)
+  empirical_cumulative_distribution_function: 5 (0.5%)
+  layered_bar_chart: 5 (0.5%)
+  pacman_chart: 5 (0.5%)
+  scatter_plot_with_shaded_area: 5 (0.5%)
+  interactive_crossfilter: 5 (0.5%)
+  line_chart_with_arrows: 5 (0.5%)
+  interactive_average: 5 (0.5%)
+  wilkinson_dot_plot: 5 (0.5%)
+  layered_chart_with_dual-axis: 5 (0.5%)
+  gantt_chart: 5 (0.5%)
+  bar_chart_with_line_on_dual_axis: 5 (0.5%)
+  brushing_scatter_plot_to_show_data_on_a_table: 5 (0.5%)
+  diverging_stacked_bar_chart: 5 (0.5%)
+  bar_chart_with_rolling_mean: 5 (0.5%)
+  waterfall_chart: 5 (0.5%)
+  heat_lane_chart: 5 (0.5%)
+  multi-panel_scatter_plot_with_linked_brushing: 5 (0.5%)
+  polar_bar_chart: 5 (0.5%)
+  line_chart_with_varying_size: 5 (0.5%)
+  selection_detail: 5 (0.5%)
+  multi-line_tooltip: 5 (0.5%)
+  2d_histogram_heatmap: 4 (0.4%)
+  comet_chart: 4 (0.4%)
+  interactive_selection_of_columns: 4 (0.4%)
+  using_selection_interval_with_mark_area: 4 (0.4%)
+  line_chart_with_percent_axis: 4 (0.4%)
+  line_chart_with_custom_order: 4 (0.4%)
+  distributions_and_medians_of_likert_scale_ratings: 4 (0.4%)
+  interactive_chart_with_aggregation: 4 (0.4%)
+  line_chart_with_datum_for_color: 4 (0.4%)
+  bar_chart_with_highlighting_on_hover_and_selection_on_click: 4 (0.4%)
+  interactive_chart_with_cross-highlight: 3 (0.3%)
+  simple_scatter_plot_with_errorbars: 3 (0.3%)
+  histogram_with_responsive_bins: 3 (0.3%)
+  quantile-quantile_plot: 3 (0.3%)
+  bar_chart_with_negative_values: 3 (0.3%)
+  grouped_bar_chart_with_error_bars: 3 (0.3%)
+  calculate_residuals: 3 (0.3%)
+  line_chart_with_layered_aggregates: 2 (0.2%)
+  multiple_interactions: 1 (0.1%)
+
+## 按图表类别统计
+  Bar Charts: 281 (25.6%)
+  Distributions: 141 (12.8%)
+  Interactive Charts: 132 (12.0%)
+  Line Charts: 122 (11.1%)
+  Scatter Plots: 84 (7.7%)
+  Advanced Calculations: 73 (6.6%)
+  Circular Plots: 61 (5.6%)
+  Simple Charts: 57 (5.2%)
+  Uncertainties And Trends: 52 (4.7%)
+  Area Charts: 50 (4.6%)
+  Tables: 45 (4.1%)
+
+## 关键特征统计
+必需特征总数: 3953
+可选特征总数: 1194
+
+特征类型分布:
+  encoding: 1787
+  mark: 1194
+  interaction: 811
+  aggregation: 577
+  composition: 453
+  filter: 243
+  overlay_stat_line: 82
+
+## 模糊性分析
+模糊类型:
+  error_correction: 759
+  visualization_ambiguity: 422
+  data_ambiguity: 249
+  information_completion: 68
+
+## 代码长度统计
+最短: 983 字符
+最长: 5188 字符
+平均: 2060 字符
+中位数: 1987 字符
+
+## 问题长度统计
+vis_question:
+  最短: 319 字符
+  最长: 873 字符
+  平均: 591 字符
+
+================================================================================

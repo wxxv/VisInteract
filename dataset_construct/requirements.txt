@@ -1,0 +1,25 @@
+# Vis-Interact Dataset Construction Dependencies
+
+# LLM API
+openai>=1.0.0
+
+# Database
+# (BIRD Mini-Dev uses local SQLite; no Snowflake dependency)
+
+# SQL Parsing
+sqlglot>=20.0.0
+
+# Visualization
+altair>=5.0.0
+vl-convert-python>=1.0.0
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Data Models
+pydantic>=2.0.0
+
+# Utilities
+tqdm>=4.65.0
+python-dotenv>=1.0.0

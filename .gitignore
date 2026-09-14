@@ -1,0 +1,50 @@
+# Cursor IDE
+.cursor/
+
+# Local original files (not to be synced)
+ori/
+
+# Paper directory is tracked by a separate repo (VisInteract_Latex)
+# See Paper/.git — do not sync it with this project's remote
+Paper/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+__MACOSX/
+._*
+
+# sensitive config files (not to be synced)
+# use config.toml.example as a template, local config.toml is not to be submitted
+config.toml
+# config.py is a safe TOML shim, can be submitted
+
+# experiments and results
+experiments/
+results/
+logs/
+
+# datasets
+VisInteractBench/
+VisInteractBench.zip
+
+# docs
+docs/
+
+tmp/
+user_study/
+VisInteract_Latex/

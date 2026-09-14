@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "vis-interact"
+version = "0.1.0"
+description = "Interactive Text-to-Vis disambiguation framework with POMDP-based entropy-driven agents"
+requires-python = ">=3.11"
+dependencies = [
+    "google-genai>=1.0.0",
+    "altair>=5.0.0",
+    "pandas>=2.0.0",
+    "openai>=1.0.0",
+    "pillow>=10.0.0",
+    "numpy>=1.24.0",
+    "vl-convert-python>=1.0.0",
+    "cairosvg>=2.7.0",
+    "tqdm>=4.66.0",
+    "tomli>=2.0.0; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+]
+browser = [
+    "playwright>=1.40.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["vis_interact*", "experiments*"]
+
+[tool.setuptools.package-data]
+vis_interact = ["py.typed"]

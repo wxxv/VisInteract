@@ -1,0 +1,704 @@
+[
+  {
+    "sample_id": "q1473_c0",
+    "source_question_id": 1473,
+    "candidate_id": "q1473_c0",
+    "db_id": "debit_card_specializing",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\n# Connect to the database\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Query to retrieve total consumption grouped by date and customer segment\n# Joining customers and yearmonth tables to associate segments with consumption data\nSQL = \"\"\"\nSELECT \n    T2.Date,\n    T1.Segment,\n    SUM(T2.Consumption) AS Consumption\nFROM customers AS T1\nINNER JOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID\nGROUP BY T2.Date, T1.Segment\nORDER BY T2.Date\n\"\"\"\n\n# Execute the query and load into a DataFrame\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert the 'Date' column (format YYYYMM) to datetime objects for proper time-series visualization\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')\n\n# The resulting DataFrame 'df' contains Date, Segment, and total Consumption",
+    "vis_question": "I'm working on the presentation for the stakeholders and I was thinking we really need to illustrate how our usage volume has been shifting recently. Can you put together a view of the total consumption trends over time? It's important that we can tell the different buyer groups apart, so please make sure to break it down by that. I just want to clearly see the ups and downs for each group.",
+    "vis_question_clear": "Visualize the fluctuation of total monthly consumption over time, broken down by customer segment.",
+    "original_question": "What was the average monthly consumption of customers in SME for the year 2013?",
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\n# Connect to the database\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Query to retrieve total consumption grouped by date and customer segment\nSQL = \"\"\"\nSELECT \n    T2.Date,\n    T1.Segment,\n    SUM(T2.Consumption) AS Consumption\nFROM customers AS T1\nINNER JOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID\nGROUP BY T2.Date, T1.Segment\nORDER BY T2.Date\n\"\"\"\n\n# Execute the query and load into a DataFrame\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert the 'Date' column (format YYYYMM) to datetime objects for proper time-series visualization\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')\n\n# Stage 3: Visualization\nchart = alt.Chart(df).mark_area().encode(\n    x=alt.X('Date:T', title='Date'),\n    y=alt.Y('Consumption:Q', title='Total Consumption'),\n    color=alt.Color('Segment:N', title='Segment'),\n    row=alt.Row('Segment:N', header=alt.Header(title='Customer Segment'))\n).properties(\n    height=80,\n    width=600,\n    title='Fluctuation of Total Monthly Consumption by Segment'\n)\n\nchart",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "error_correction",
+        "visualization_ambiguity"
+      ],
+      "template_names": [
+        "field_name_error",
+        "encoding_channel_missing"
+      ],
+      "target_feature_paths": [
+        "encoding.color.field",
+        "encoding.*.field",
+        "encoding.shape.field",
+        "encoding.size.field"
+      ],
+      "preferred_interface": "ask_user_vis",
+      "difficulty": "medium",
+      "corruption": null
+    },
+    "key_features": [
+      {
+        "id": "kf_mark_area",
+        "type": "mark",
+        "text": "Use an area chart to visualize the volume and fluctuation of consumption.",
+        "args": {
+          "mark": "area"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_composition_facet",
+        "type": "composition",
+        "text": "Split the visualization into separate rows for each Customer Segment to compare them side-by-side.",
+        "args": {
+          "row": "Segment"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_xy",
+        "type": "encoding",
+        "text": "Show the Total Consumption values over time.",
+        "args": {
+          "x": "Date",
+          "y": "Consumption"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_color",
+        "type": "encoding",
+        "text": "Color-code the areas based on the Segment.",
+        "args": {
+          "color": "Segment"
+        },
+        "must": false
+      }
+    ],
+    "chart_type": "faceted_area_chart",
+    "chart_category": "Area Charts",
+    "difficulty": "moderate"
+  },
+  {
+    "sample_id": "q1472_c2",
+    "source_question_id": 1472,
+    "candidate_id": "q1472_c2",
+    "db_id": "debit_card_specializing",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Select Amount and Price for the scatter plot, and Segment for faceting\n# Join transactions with gas stations to associate each transaction with a market segment\nSQL = \"\"\"\nSELECT \n    T1.Amount,\n    T1.Price,\n    T2.Segment\nFROM transactions_1k AS T1\nJOIN gasstations AS T2 ON T1.GasStationID = T2.GasStationID\nWHERE T1.Amount IS NOT NULL AND T1.Price IS NOT NULL\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# The data is already in the correct format for a faceted scatter plot (raw records)\n# Just ensuring the dataframe is ready\ndf.head()",
+    "vis_question": "I've been going through the operational data for our partner meeting next week, and I'm trying to get a better handle on our efficiency. Could you help me visualize the relationship between our transaction volumes and the costs? I really need to see if there's a connection there. I want to look at this specifically across the different gas station segments to see how they stack up against each other. Just generate a chart or something that shows how volume and cost relate for these segments.",
+    "vis_question_clear": "Visualize the correlation between transaction volume and cost across different gas station segments.",
+    "original_question": "In 2012, who had the least consumption in LAM?",
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Data retrieval\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Select Amount and Price for the scatter plot, and Segment for faceting\n# Join transactions with gas stations to associate each transaction with a market segment\nSQL = \"\"\"\nSELECT \n    T1.Amount,\n    T1.Price,\n    T2.Segment\nFROM transactions_1k AS T1\nJOIN gasstations AS T2 ON T1.GasStationID = T2.GasStationID\nWHERE T1.Amount IS NOT NULL AND T1.Price IS NOT NULL\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# No additional processing needed as the SQL provides the raw data required for the scatter plot\n\n# Stage 3: Visualization\nchart = alt.Chart(df).mark_point(filled=True, opacity=0.6).encode(\n    x=alt.X('Amount:Q', title='Transaction Volume'),\n    y=alt.Y('Price:Q', title='Transaction Cost'),\n    row=alt.Row('Segment:N', header=alt.Header(title='Gas Station Segment')),\n    tooltip=['Segment', 'Amount', 'Price']\n).properties(\n    width=400,\n    height=200,\n    title='Transaction Volume vs Cost by Gas Station Segment'\n).interactive()\n\nchart",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "visualization_ambiguity"
+      ],
+      "template_names": [
+        "chart_type_missing",
+        "axis_assignment_missing"
+      ],
+      "target_feature_paths": [
+        "mark.type",
+        "encoding.y.field",
+        "encoding.x.field"
+      ],
+      "preferred_interface": "ask_user_vis",
+      "difficulty": "medium",
+      "corruption": null
+    },
+    "key_features": [
+      {
+        "id": "kf_mark_point",
+        "type": "mark",
+        "text": "Create a scatter plot to show the distribution of individual transactions.",
+        "args": {
+          "mark": "point"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_axes",
+        "type": "encoding",
+        "text": "Plot Transaction Volume on the x-axis versus Transaction Cost on the y-axis.",
+        "args": {
+          "x": "Amount",
+          "y": "Price"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_composition_row",
+        "type": "composition",
+        "text": "Break the chart down into separate rows for each Gas Station Segment.",
+        "args": {
+          "row": "Segment"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_interaction_zoom",
+        "type": "interaction",
+        "text": "Allow me to zoom in and pan around the chart to see dense areas better.",
+        "args": {
+          "bind": "scales"
+        },
+        "must": false
+      },
+      {
+        "id": "kf_interaction_tooltip",
+        "type": "interaction",
+        "text": "Show the specific segment, amount, and price when I hover over a dot.",
+        "args": {
+          "tooltip": [
+            "Segment",
+            "Amount",
+            "Price"
+          ]
+        },
+        "must": false
+      }
+    ],
+    "chart_type": "faceted_scatter_plot",
+    "chart_category": "Scatter Plots",
+    "difficulty": "moderate"
+  },
+  {
+    "sample_id": "q1471_c0",
+    "source_question_id": 1471,
+    "candidate_id": "q1471_c0",
+    "db_id": "debit_card_specializing",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Join yearmonth and customers to get consumption by date and currency\nSQL = '''\nSELECT \n    T1.Date,\n    T2.Currency,\n    SUM(T1.Consumption) AS Total_Consumption\nFROM yearmonth AS T1\nJOIN customers AS T2 ON T1.CustomerID = T2.CustomerID\nGROUP BY T1.Date, T2.Currency\nORDER BY T1.Date\n'''\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert 'Date' column (format YYYYMM) to datetime objects for temporal visualization\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')",
+    "vis_question": "Hey, I'm putting together the update for the client and I need to show them how the consumption shares by currency have been moving. I feel like a pie chart is usually the standard for shares, right? So could you make me a pie chart that tracks the evolution of these currency shares over time? I just need to see the general trends.",
+    "vis_question_clear": "Visualize the evolution of consumption shares by currency over time.",
+    "original_question": "What is the ratio of customers who pay in EUR against customers who pay in CZK?",
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Join yearmonth and customers to get consumption by date and currency\nSQL = '''\nSELECT \n    T1.Date,\n    T2.Currency,\n    SUM(T1.Consumption) AS Total_Consumption\nFROM yearmonth AS T1\nJOIN customers AS T2 ON T1.CustomerID = T2.CustomerID\nGROUP BY T1.Date, T2.Currency\nORDER BY T1.Date\n'''\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert 'Date' column (format YYYYMM) to datetime objects for temporal visualization\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')\n\n# Stage 3: Visualization\nchart = alt.Chart(df).mark_area().encode(\n    x=alt.X('Date:T', title='Date'),\n    y=alt.Y('Total_Consumption:Q', stack='normalize', axis=alt.Axis(format='%'), title='Share of Consumption'),\n    color=alt.Color('Currency:N', title='Currency'),\n    tooltip=[\n        alt.Tooltip('Date:T', format='%Y-%m', title='Date'),\n        alt.Tooltip('Currency:N', title='Currency'),\n        alt.Tooltip('Total_Consumption:Q', format=',.2f', title='Consumption')\n    ]\n).properties(\n    title='Evolution of Consumption Shares by Currency Over Time',\n    width=600,\n    height=400\n)\n\nchart",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "error_correction",
+        "data_ambiguity"
+      ],
+      "template_names": [
+        "vis_data_incompatible",
+        "time_granularity_missing"
+      ],
+      "target_feature_paths": [
+        "mark.type",
+        "encoding.x.timeUnit",
+        "encoding.y.timeUnit"
+      ],
+      "preferred_interface": "ask_user_vis",
+      "difficulty": "hard",
+      "corruption": null
+    },
+    "key_features": [
+      {
+        "id": "kf_mark_area",
+        "type": "mark",
+        "text": "Use a 100% stacked area chart to visualize the evolution of proportions.",
+        "args": {
+          "mark": "area"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_x",
+        "type": "encoding",
+        "text": "Display the timeline based on the Date along the bottom axis.",
+        "args": {
+          "channel": "x",
+          "field": "Date"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_y",
+        "type": "encoding",
+        "text": "Show the share of Total Consumption as a percentage on the vertical axis.",
+        "args": {
+          "channel": "y",
+          "field": "Total_Consumption"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_color",
+        "type": "encoding",
+        "text": "Distinguish between different Currencies using color segments.",
+        "args": {
+          "channel": "color",
+          "field": "Currency"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_interaction_tooltip",
+        "type": "interaction",
+        "text": "Show details like the specific date and consumption amount when hovering.",
+        "args": {
+          "interaction": "tooltip"
+        },
+        "must": false
+      }
+    ],
+    "chart_type": "normalized_stacked_area_chart",
+    "chart_category": "Area Charts",
+    "difficulty": "simple"
+  },
+  {
+    "sample_id": "q1473_c1",
+    "source_question_id": 1473,
+    "candidate_id": "q1473_c1",
+    "db_id": "debit_card_specializing",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Retrieve raw Price data associated with each Gas Station Segment.\n# We join transactions to gasstations to get the Segment for each transaction.\n# Raw data is required to calculate the mean and confidence intervals dynamically in the visualization.\nSQL = \"\"\"\nSELECT \n    T2.Segment,\n    T1.Price\nFROM transactions_1k AS T1\nJOIN gasstations AS T2 ON T1.GasStationID = T2.GasStationID\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# The result is ready for visualization (x=Price, y=Segment).\n# Aggregation (Mean) and Error Bars (Confidence Interval) will be computed by the chart engine.",
+    "vis_question": "Hi, I'm pulling together the deck for the strategy meeting and I need some help with the gas station data. I was thinking it would be good to visually compare the average transaction prices for the different segments we have. Can you make a chart for that? I also want to see how much the prices vary within each group, just so we know how reliable the average is. Also, make sure to include the data for next year so we can see where it's heading.",
+    "vis_question_clear": "Compare the average transaction prices for different gas station segments using error bars to show the confidence interval.",
+    "original_question": "What was the average monthly consumption of customers in SME for the year 2013?",
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Retrieve raw Price data associated with each Gas Station Segment.\n# We join transactions to gasstations to get the Segment for each transaction.\n# Raw data is required to calculate the mean and confidence intervals dynamically in the visualization.\nSQL = \"\"\"\nSELECT \n    T2.Segment,\n    T1.Price\nFROM transactions_1k AS T1\nJOIN gasstations AS T2 ON T1.GasStationID = T2.GasStationID\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# No additional processing needed as aggregation happens in Altair\n\n# Stage 3: Visualization\n# Create points for the mean value\npoints = alt.Chart(df).mark_point(\n    filled=True,\n    color='black'\n).encode(\n    x=alt.X('mean(Price)', title='Average Transaction Price'),\n    y=alt.Y('Segment', sort=alt.EncodingSortField(\n        field='Price',\n        op='mean',\n        order='descending'\n    ), title='Gas Station Segment')\n).properties(\n    width=500,\n    height=300,\n    title='Average Transaction Price by Segment with Confidence Intervals'\n)\n\n# Create error bars showing the confidence interval\nerror_bars = points.mark_rule().encode(\n    x='ci0(Price)',\n    x2='ci1(Price)'\n)\n\n# Combine the layers\nchart = points + error_bars\n\nchart",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "visualization_ambiguity",
+        "error_correction"
+      ],
+      "template_names": [
+        "chart_type_missing",
+        "data_range_mismatch"
+      ],
+      "target_feature_paths": [
+        "transform.filter",
+        "mark.type"
+      ],
+      "preferred_interface": "ask_user_vis",
+      "difficulty": "medium",
+      "corruption": null
+    },
+    "key_features": [
+      {
+        "id": "kf_agg_mean",
+        "type": "aggregation",
+        "text": "Calculate and show the average transaction price for each gas station segment.",
+        "args": {
+          "aggregate": "mean",
+          "field": "Price",
+          "groupby": "Segment"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_mark_errorbar",
+        "type": "mark",
+        "text": "Display the values using points for the average with error bars (lines) to show the confidence intervals.",
+        "args": {
+          "mark": "point",
+          "layer": "rule"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_sort_desc",
+        "type": "encoding",
+        "text": "Sort the segments so that the one with the highest average price is at the top.",
+        "args": {
+          "sort": "descending",
+          "field": "Price"
+        },
+        "must": true
+      }
+    ],
+    "chart_type": "sorted_error_bars_showing_confidence_interval",
+    "chart_category": "Advanced Calculations",
+    "difficulty": "moderate"
+  },
+  {
+    "sample_id": "q1476_c0",
+    "source_question_id": 1476,
+    "candidate_id": "q1476_c0",
+    "db_id": "debit_card_specializing",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Query to aggregate consumption by date and customer segment\n# We group by Date and Segment to calculate the total consumption for each group per month\nSQL = \"\"\"\nSELECT \n    T2.Date,\n    T1.Segment,\n    SUM(T2.Consumption) as Consumption\nFROM customers AS T1\nJOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID\nGROUP BY T2.Date, T1.Segment\nORDER BY T2.Date\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert 'Date' column from 'YYYYMM' string format to datetime objects\n# This allows the visualization to correctly interpret the time axis\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')",
+    "vis_question": "I'm putting together the sustainability report for the board meeting and I need to understand our gas usage patterns better. I want to see the share of gas consumption for each customer segment over the years to see who the big users are. Can you make a chart that helps me distinguish the different categories and see how their portion of the total changes? Also, it would be really helpful if we could include the trends up to 2025, since we need to talk about our future targets.",
+    "vis_question_clear": "Visualize the percentage contribution of each customer segment to total gas consumption over time.",
+    "original_question": "What was the difference in gas consumption between CZK-paying customers and EUR-paying customers in 2012?",
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Query to aggregate consumption by date and customer segment\n# We group by Date and Segment to calculate the total consumption for each group per month\nSQL = \"\"\"\nSELECT \n    T2.Date,\n    T1.Segment,\n    SUM(T2.Consumption) as Consumption\nFROM customers AS T1\nJOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID\nGROUP BY T2.Date, T1.Segment\nORDER BY T2.Date\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert 'Date' column from 'YYYYMM' string format to datetime objects\n# This allows the visualization to correctly interpret the time axis\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')\n\n# Stage 3: Visualization\n# Create a normalized stacked area chart to show percentage contribution over time\nchart = alt.Chart(df).mark_area().encode(\n    x=alt.X('Date:T', title='Date'),\n    # 'stack=\"normalize\"' converts absolute values to percentage (0-1) of the total for that x-value\n    y=alt.Y('Consumption:Q', stack='normalize', title='Percentage of Total Consumption', axis=alt.Axis(format='%')),\n    color=alt.Color('Segment:N', title='Customer Segment'),\n    tooltip=[\n        alt.Tooltip('Date:T', format='%Y-%m'),\n        alt.Tooltip('Segment:N'),\n        alt.Tooltip('Consumption:Q', format=',.2f', title='Consumption')\n    ]\n).properties(\n    title='Percentage Contribution of Each Customer Segment to Gas Consumption',\n    width=600,\n    height=400\n)\n\nchart",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "error_correction",
+        "visualization_ambiguity"
+      ],
+      "template_names": [
+        "data_range_mismatch",
+        "encoding_channel_missing"
+      ],
+      "target_feature_paths": [
+        "encoding.color.field",
+        "encoding.shape.field",
+        "transform.filter",
+        "encoding.size.field"
+      ],
+      "preferred_interface": "ask_user_vis",
+      "difficulty": "medium",
+      "corruption": null
+    },
+    "key_features": [
+      {
+        "id": "kf_mark_area",
+        "type": "mark",
+        "text": "Use a 100% stacked area chart to visualize the data.",
+        "args": {
+          "mark": "area"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_y_normalize",
+        "type": "encoding",
+        "text": "Show the vertical axis as the percentage of total consumption (market share) rather than raw numbers.",
+        "args": {
+          "channel": "y",
+          "field": "Consumption",
+          "stack": "normalize"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_color",
+        "type": "encoding",
+        "text": "Differentiate the various Customer Segments by color.",
+        "args": {
+          "channel": "color",
+          "field": "Segment"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_x",
+        "type": "encoding",
+        "text": "Plot the timeline along the horizontal axis.",
+        "args": {
+          "channel": "x",
+          "field": "Date"
+        },
+        "must": true
+      }
+    ],
+    "chart_type": "normalized_stacked_area_chart",
+    "chart_category": "Area Charts",
+    "difficulty": "challenging"
+  },
+  {
+    "sample_id": "q1472_c0",
+    "source_question_id": 1472,
+    "candidate_id": "q1472_c0",
+    "db_id": "debit_card_specializing",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Join customers and yearmonth tables to get consumption details per segment\n# Group by Date and Segment to calculate total consumption for the stacked area chart\nSQL = \"\"\"\nSELECT \n    T2.Date,\n    T1.Segment,\n    SUM(T2.Consumption) AS Consumption\nFROM customers AS T1\nJOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID\nGROUP BY T2.Date, T1.Segment\nORDER BY T2.Date\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert YYYYMM string format to datetime objects for proper temporal scaling on the x-axis\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')",
+    "vis_question": "Hey, I'm pulling together some slides for the quarterly review and I need to show how our consumption market share is looking. Can you whip up a visual that breaks down the share by customer segment? I basically want to see how the split between segments has changed over time to see if there are any interesting patterns or trends we should know about.",
+    "vis_question_clear": "Visualize the evolution of consumption market share across customer segments over time.",
+    "original_question": "In 2012, who had the least consumption in LAM?",
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Data retrieval\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Join customers and yearmonth tables to get consumption details per segment\n# Group by Date and Segment to calculate total consumption for the stacked area chart\nSQL = \"\"\"\nSELECT \n    T2.Date,\n    T1.Segment,\n    SUM(T2.Consumption) AS Consumption\nFROM customers AS T1\nJOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID\nGROUP BY T2.Date, T1.Segment\nORDER BY T2.Date\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert YYYYMM string format to datetime objects for proper temporal scaling on the x-axis\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')\n\n# Stage 3: Visualization\nchart = alt.Chart(df).mark_area().encode(\n    x=alt.X('Date:T', title='Date'),\n    y=alt.Y('Consumption:Q', stack='normalize', title='Share of Consumption', axis=alt.Axis(format='%')),\n    color=alt.Color('Segment:N', title='Customer Segment'),\n    tooltip=[\n        alt.Tooltip('Date:T', format='%Y-%m'),\n        'Segment',\n        alt.Tooltip('Consumption:Q', format=',.2f')\n    ]\n).properties(\n    title='Evolution of Consumption Market Share Across Customer Segments',\n    width=600,\n    height=400\n)\n\nchart",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "data_ambiguity"
+      ],
+      "template_names": [
+        "time_granularity_missing"
+      ],
+      "target_feature_paths": [
+        "encoding.x.timeUnit",
+        "encoding.y.timeUnit"
+      ],
+      "preferred_interface": "ask_user_text",
+      "difficulty": "easy",
+      "corruption": null
+    },
+    "key_features": [
+      {
+        "id": "kf_mark_area_normalized",
+        "type": "mark",
+        "text": "Create a 100% stacked area chart to visualize the market share composition.",
+        "args": {
+          "mark": "area",
+          "properties": {
+            "stack": "normalize"
+          }
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_x_date",
+        "type": "encoding",
+        "text": "Plot the timeline along the x-axis using the Date field.",
+        "args": {
+          "channel": "x",
+          "field": "Date"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_y_consumption_pct",
+        "type": "encoding",
+        "text": "Represent the Share of Consumption as a percentage on the y-axis.",
+        "args": {
+          "channel": "y",
+          "field": "Consumption",
+          "format": "%"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_color_segment",
+        "type": "encoding",
+        "text": "Differentiate the Customer Segments using distinct colors.",
+        "args": {
+          "channel": "color",
+          "field": "Segment"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_interaction_tooltip",
+        "type": "interaction",
+        "text": "Show details for Date, Segment, and Consumption when hovering over the chart.",
+        "args": {
+          "tooltip": [
+            "Date",
+            "Segment",
+            "Consumption"
+          ]
+        },
+        "must": false
+      }
+    ],
+    "chart_type": "normalized_stacked_area_chart",
+    "chart_category": "Area Charts",
+    "difficulty": "moderate"
+  },
+  {
+    "sample_id": "q1471_c1",
+    "source_question_id": 1471,
+    "candidate_id": "q1471_c1",
+    "db_id": "debit_card_specializing",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Calculate the total financial performance (Sum of Price) for each ChainID\n# Join 'transactions_1k' with 'gasstations' to link transactions to specific chains\nSQL = \"\"\"\nSELECT \n    g.ChainID, \n    SUM(t.Price) AS TotalPrice\nFROM transactions_1k AS t\nJOIN gasstations AS g ON t.GasStationID = g.GasStationID\nGROUP BY g.ChainID\nORDER BY TotalPrice DESC\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert ChainID to string so it is treated as a nominal category in the visualization\ndf['ChainID'] = df['ChainID'].astype(str)",
+    "vis_question": "I'm working on the financial overview for the stakeholders and I need to see a breakdown of performance. Can you show me a chart that ranks the gas station brands? I specifically want to see them ordered by the `net_profit` field. I know we track the transaction prices, so just use that to show me who is making the most. It's really important that I see the top earners clearly so I can put it in my report.",
+    "vis_question_clear": "Rank the gas station chains by their total generated revenue based on transaction prices.",
+    "original_question": "What is the ratio of customers who pay in EUR against customers who pay in CZK?",
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Data retrieval\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Calculate the total financial performance (Sum of Price) for each ChainID\n# Join 'transactions_1k' with 'gasstations' to link transactions to specific chains\nSQL = \"\"\"\nSELECT \n    g.ChainID, \n    SUM(t.Price) AS TotalPrice\nFROM transactions_1k AS t\nJOIN gasstations AS g ON t.GasStationID = g.GasStationID\nGROUP BY g.ChainID\nORDER BY TotalPrice DESC\n\"\"\"\n\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert ChainID to string so it is treated as a nominal category in the visualization\ndf['ChainID'] = df['ChainID'].astype(str)\n\n# Stage 3: Visualization\nchart = alt.Chart(df).mark_bar().encode(\n    x=alt.X('TotalPrice:Q', title='Total Revenue'),\n    y=alt.Y('ChainID:N', sort='-x', title='Chain ID'),\n    tooltip=[\n        alt.Tooltip('ChainID', title='Chain ID'),\n        alt.Tooltip('TotalPrice', title='Total Revenue', format=',.2f')\n    ]\n).properties(\n    title='Gas Station Chains Ranked by Total Revenue',\n    width=600,\n    height=400\n)\n\nchart",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "error_correction",
+        "visualization_ambiguity"
+      ],
+      "template_names": [
+        "field_name_error",
+        "axis_assignment_missing"
+      ],
+      "target_feature_paths": [
+        "encoding.*.field",
+        "encoding.x.field",
+        "encoding.y.field"
+      ],
+      "preferred_interface": "ask_user_vis",
+      "difficulty": "medium",
+      "corruption": null
+    },
+    "key_features": [
+      {
+        "id": "kf_mark_bar",
+        "type": "mark",
+        "text": "Visualize this data using a bar chart.",
+        "args": {
+          "mark": "bar"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_encoding_fields",
+        "type": "encoding",
+        "text": "Show the Total Revenue for each gas station Chain ID.",
+        "args": {
+          "x": "TotalPrice",
+          "y": "ChainID"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_sort_rank",
+        "type": "encoding",
+        "text": "Rank the chains by sorting them from highest revenue to lowest.",
+        "args": {
+          "sort": "descending",
+          "field": "TotalPrice"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_tooltip_details",
+        "type": "interaction",
+        "text": "Show me the specific Chain ID and formatted revenue amount when I hover over a bar.",
+        "args": {
+          "tooltip": [
+            "ChainID",
+            "TotalPrice"
+          ]
+        },
+        "must": false
+      }
+    ],
+    "chart_type": "sorted_bar_chart",
+    "chart_category": "Bar Charts",
+    "difficulty": "simple"
+  },
+  {
+    "sample_id": "q1479_c0",
+    "source_question_id": 1479,
+    "candidate_id": "q1479_c0",
+    "db_id": "debit_card_specializing",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Connect and retrieve data\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Calculate total consumption per month for customers paying in CZK\nSQL = \"\"\"\nSELECT \n    T2.Date, \n    SUM(T2.Consumption) AS Monthly_Consumption\nFROM customers AS T1 \nJOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID \nWHERE T1.Currency = 'CZK' \nGROUP BY T2.Date \nORDER BY T2.Date\n\"\"\"\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert 'YYYYMM' string format to datetime objects for temporal plotting\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')\n\n# Calculate the long-term average monthly consumption\naverage_consumption = df['Monthly_Consumption'].mean()\n\n# Calculate the residual (delta) for each month: Actual - Average\ndf['Consumption_Delta'] = df['Monthly_Consumption'] - average_consumption",
+    "vis_question": "I've been looking into our expenses for the upcoming client meeting, and I think we need a graphic to explain the variance in our energy spending. Can you visualize the gas_cost_czk for me? I specifically want to show the monthly deviation from the average monthly usage. It would be great to just see how far off each month is from the average, you know? Just a simple visual to highlight the months where we paid way more or less than usual.",
+    "vis_question_clear": "Visualize the monthly deviation of gas consumption paid in CZK from the average monthly consumption.",
+    "original_question": "Which year recorded the most consumption of gas paid in CZK?",
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Data retrieval\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\n\n# Calculate total consumption per month for customers paying in CZK\nSQL = \"\"\"\nSELECT \n    T2.Date, \n    SUM(T2.Consumption) AS Monthly_Consumption\nFROM customers AS T1 \nJOIN yearmonth AS T2 ON T1.CustomerID = T2.CustomerID \nWHERE T1.Currency = 'CZK' \nGROUP BY T2.Date \nORDER BY T2.Date\n\"\"\"\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Convert 'YYYYMM' string format to datetime objects for temporal plotting\ndf['Date'] = pd.to_datetime(df['Date'], format='%Y%m')\n\n# Calculate the long-term average monthly consumption\naverage_consumption = df['Monthly_Consumption'].mean()\n\n# Calculate the residual (delta) for each month: Actual - Average\ndf['Consumption_Delta'] = df['Monthly_Consumption'] - average_consumption\n\n# Stage 3: Visualization\nchart = alt.Chart(df).mark_bar().encode(\n    x=alt.X(\"Date:T\", title=\"Date\"),\n    y=alt.Y(\"Consumption_Delta:Q\", title=\"Consumption Deviation\"),\n    color=alt.Color(\"Consumption_Delta:Q\", title=\"Deviation\").scale(domainMid=0),\n    tooltip=[\n        alt.Tooltip(\"Date:T\", title=\"Date\", format=\"%Y-%m\"),\n        alt.Tooltip(\"Monthly_Consumption:Q\", title=\"Monthly Consumption\", format=\",.0f\"),\n        alt.Tooltip(\"Consumption_Delta:Q\", title=\"Deviation\", format=\",.0f\")\n    ]\n).properties(\n    title=\"Monthly Deviation of Gas Consumption from Average (CZK)\",\n    width=600,\n    height=400\n)\n\nchart",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "visualization_ambiguity",
+        "error_correction"
+      ],
+      "template_names": [
+        "chart_type_missing",
+        "field_name_error"
+      ],
+      "target_feature_paths": [
+        "encoding.*.field",
+        "mark.type"
+      ],
+      "preferred_interface": "ask_user_vis",
+      "difficulty": "medium",
+      "corruption": null
+    },
+    "key_features": [
+      {
+        "id": "kf_mark_bar",
+        "type": "mark",
+        "text": "I want to see a bar chart to visualize the deviations.",
+        "args": {
+          "mark": "bar"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_x",
+        "type": "encoding",
+        "text": "Display the timeline by date across the bottom.",
+        "args": {
+          "channel": "x",
+          "field": "Date"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_y",
+        "type": "encoding",
+        "text": "Map the vertical height of the bars to the Consumption Deviation (the difference from the average).",
+        "args": {
+          "channel": "y",
+          "field": "Consumption_Delta"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_enc_color",
+        "type": "encoding",
+        "text": "Color the bars based on the deviation amount so I can easily distinguish positive and negative values.",
+        "args": {
+          "channel": "color",
+          "field": "Consumption_Delta"
+        },
+        "must": false
+      },
+      {
+        "id": "kf_tooltip",
+        "type": "interaction",
+        "text": "Include tooltips that show the Date, Monthly Consumption, and Deviation when I hover over a bar.",
+        "args": {
+          "channel": "tooltip",
+          "fields": [
+            "Date",
+            "Monthly_Consumption",
+            "Consumption_Delta"
+          ]
+        },
+        "must": false
+      }
+    ],
+    "chart_type": "calculate_residuals",
+    "chart_category": "Advanced Calculations",
+    "difficulty": "moderate"
+  },
+  {
+    "sample_id": "q1479_c2",
+    "source_question_id": 1479,
+    "candidate_id": "q1479_c2",
+    "db_id": "debit_card_specializing",
+    "data_processing_code": "import sqlite3\nimport pandas as pd\n\n# Stage 1: SQL\n# Retrieve Date, Time, and Price.\n# We use ORDER BY RANDOM() to get a representative random sample of transactions \n# rather than a sequential chunk, and LIMIT 80 to ensure the dataset size is \n# optimal for visualization (within the 5-100 rows requirement).\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\nSQL = \"SELECT Date, Time, Price FROM transactions_1k ORDER BY RANDOM() LIMIT 80\"\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas\n# The 'Date' column alone has very low cardinality (only 4 distinct days), which makes \n# polynomial regression unstable. We combine 'Date' and 'Time' to create a precise \n# timestamp, providing high granularity for the X-axis.\ndf['Date'] = pd.to_datetime(df['Date'].astype(str) + ' ' + df['Time'].astype(str))\n\n# Filter to relevant columns and sort chronologically\ndf = df[['Date', 'Price']].sort_values('Date')",
+    "vis_question": "I've been looking at our numbers for the upcoming strategy meeting, and I really need to get a better handle on how our transaction prices have been moving around lately. Could you put together a visual for me that shows the price fluctuations? I'm trying to spot the general direction we're heading, essentially the big picture trend. It would be super helpful if you could project this out through 2025 as well, so I can show the client where we expect things to land.",
+    "vis_question_clear": "Show me the fluctuation of transaction prices over time by plotting individual transactions and overlaying polynomial regression lines to show the general trend.",
+    "original_question": "Which year recorded the most consumption of gas paid in CZK?",
+    "altair_code": "import altair as alt\nimport sqlite3\nimport pandas as pd\n\n# Stage 1: SQL - Data retrieval\n# Retrieve Date, Time, and Price.\n# We use ORDER BY RANDOM() to get a representative random sample of transactions \n# rather than a sequential chunk, and LIMIT 80 to ensure the dataset size is \n# optimal for visualization.\nconn = sqlite3.connect('./databases/debit_card_specializing.sqlite')\nSQL = \"SELECT Date, Time, Price FROM transactions_1k ORDER BY RANDOM() LIMIT 80\"\ndf = pd.read_sql_query(SQL, conn)\nconn.close()\n\n# Stage 2: Pandas Processing\n# Combine 'Date' and 'Time' to create a precise timestamp for the X-axis\ndf['Date'] = pd.to_datetime(df['Date'].astype(str) + ' ' + df['Time'].astype(str))\n\n# Filter to relevant columns and sort chronologically\ndf = df[['Date', 'Price']].sort_values('Date')\n\n# Stage 3: Visualization\n# Define the degree of the polynomial fits to overlay\ndegree_list = [1, 3, 5]\n\n# Base chart: Scatter plot of individual transaction prices\nbase = alt.Chart(df).mark_circle(color=\"black\", opacity=0.5).encode(\n    alt.X(\"Date:T\", title=\"Date\"),\n    alt.Y(\"Price:Q\", title=\"Transaction Price\")\n)\n\n# Layer: Generate polynomial regression lines for each degree in the list\npolynomial_fit = [\n    base.transform_regression(\n        \"Date\", \"Price\", method=\"poly\", order=order, as_=[\"Date\", str(order)]\n    )\n    .mark_line()\n    .transform_fold([str(order)], as_=[\"Degree\", \"Price\"])\n    .encode(alt.Color(\"Degree:N\", title=\"Polynomial Degree\"))\n    for order in degree_list\n]\n\n# Combine the base scatter plot with the regression lines\nchart = alt.layer(base, *polynomial_fit).properties(\n    title=\"Transaction Price Fluctuations with Polynomial Trend Lines\",\n    width=600,\n    height=400\n)\n\nchart",
+    "ambiguity_profile": {
+      "ambiguity_types": [
+        "visualization_ambiguity",
+        "error_correction"
+      ],
+      "template_names": [
+        "chart_type_missing",
+        "data_range_mismatch"
+      ],
+      "target_feature_paths": [
+        "transform.filter",
+        "mark.type"
+      ],
+      "preferred_interface": "ask_user_vis",
+      "difficulty": "medium",
+      "corruption": null
+    },
+    "key_features": [
+      {
+        "id": "kf_mark_scatter",
+        "type": "mark",
+        "text": "Display the raw data as a scatter plot showing individual transaction prices over time.",
+        "args": {
+          "mark": "point",
+          "encoding": {
+            "x": "Date",
+            "y": "Price"
+          }
+        },
+        "must": true
+      },
+      {
+        "id": "kf_stat_poly_trends",
+        "type": "overlay_stat_line",
+        "text": "Overlay multiple polynomial trend lines (degrees 1, 3, and 5) to model the price direction.",
+        "args": {
+          "transform": "regression",
+          "method": "poly"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_color_degree",
+        "type": "encoding",
+        "text": "Color-code the trend lines based on their polynomial degree to distinguish them.",
+        "args": {
+          "channel": "color",
+          "field": "Degree"
+        },
+        "must": true
+      },
+      {
+        "id": "kf_axes_titles",
+        "type": "encoding",
+        "text": "Label the axes clearly as 'Date' and 'Transaction Price'.",
+        "args": {
+          "channel": "axis",
+          "properties": [
+            "title"
+          ]
+        },
+        "must": false
+      }
+    ],
+    "chart_type": "polynomial_fit_plot_with_regression_transform",
+    "chart_category": "Uncertainties And Trends",
+    "difficulty": "moderate"
+  }
+]
